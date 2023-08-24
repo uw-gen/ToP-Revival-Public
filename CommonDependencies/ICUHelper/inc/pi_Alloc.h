@@ -12,6 +12,7 @@
 #endif
 
 #include <list>
+#include <string>
 using namespace std;
 
 #define LOG_POSITION
@@ -100,7 +101,7 @@ public:
 
 	typedef list< pi_LeakItem > pi_LeakList;
 	pi_LeakList pi_leakList;
-	string pi_fileName;
+	std::string pi_fileName;
 
 	void addItem(void* addr, const char* fileName, int lineNo, size_t size);
 	void removeItem(void* addr);
