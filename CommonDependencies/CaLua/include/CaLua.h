@@ -33,20 +33,20 @@ extern "C"{
 #define CLU_STDCALL		1
 
 
-int			CLU_Init();
-int			CLU_Shutdown();
-int			CLU_ShutdownState(int state);
-int			CLU_LoadState(int state);
-int			CLU_LoadScript(char* filename);
-int			CLU_RegisterStructure(char* name, char* desc);
-int			CLU_RegisterFunction(char* name, char* ret, char* args, int convention, void (__cdecl *func)(void));
+__declspec(dllexport) int			CLU_Init();
+__declspec(dllexport) int			CLU_Shutdown();
+__declspec(dllexport) int			CLU_ShutdownState(int state);
+__declspec(dllexport) int			CLU_LoadState(int state);
+__declspec(dllexport) int			CLU_LoadScript(char* filename);
+__declspec(dllexport) int			CLU_RegisterStructure(char* name, char* desc);
+__declspec(dllexport) int			CLU_RegisterFunction(char* name, char* ret, char* args, int convention, void (__cdecl *func)(void));
 
-void*		CLU_CallScriptFunction(char* funcName, char* retArgs, char* args, ...);
+__declspec(dllexport) void*		CLU_CallScriptFunction(char* funcName, char* retArgs, char* args, ...);
 
-void		CLU_DllFree(void* memptr);
+__declspec(dllexport) void		CLU_DllFree(void* memptr);
 
-lua_State*  CLU_GetVirtualMachine();
-int			CLU_GetCurrentState();
+__declspec(dllexport) lua_State*  CLU_GetVirtualMachine();
+__declspec(dllexport) int			CLU_GetCurrentState();
 
 #ifdef __cplusplus
 }
