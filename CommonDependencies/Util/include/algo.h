@@ -14,8 +14,8 @@ bool decrypt_Noise(char szkey[4], char* src, unsigned int src_len);
 bool encrypt_A(char* out, char* in, long data_len, char const* key, int key_len, bool en = true);
 bool encrypt_B(char* src, unsigned int src_len, char* key, unsigned int key_len, bool en = true);
 
-bool dbpswd_out(char const* ctxt, int ctxt_len, string& pswd);
-bool dbpswd_in(char const* pswd, int pswd_len, string& ctxt);
+bool dbpswd_out(char const* ctxt, int ctxt_len, std::string& pswd);
+bool dbpswd_in(char const* pswd, int pswd_len, std::string& ctxt);
 
 void md5(char const* msg, unsigned char dig[16]);
 void md5string(char const* msg, char str[33]);
@@ -30,7 +30,7 @@ public:
     KCHAPc(char const* name, char const* password);
     ~KCHAPc();
 
-    string GetPwdDigest() const
+    std::string GetPwdDigest() const
     {
         return m_strPwdDig;
     }

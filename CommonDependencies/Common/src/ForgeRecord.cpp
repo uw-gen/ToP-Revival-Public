@@ -2,7 +2,7 @@
 //---------------------------------------------------------
 
 #include "ForgeRecord.h"
-
+using namespace std;
 //---------------------------------------------------------
 CForgeRecordSet * CForgeRecordSet::_Instance = NULL;
 

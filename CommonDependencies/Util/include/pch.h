@@ -20,7 +20,6 @@
 #include <map>
 #include <list>
 #include <string>
-using namespace std;
 
 
 // 平台相关定义

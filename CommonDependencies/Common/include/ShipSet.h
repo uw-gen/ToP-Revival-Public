@@ -312,7 +312,7 @@ protected:
 		SAFE_DELETE(pInfo->pData);
 	}
 
-	virtual BOOL _ReadRawDataInfo(CRawDataInfo *pRawDataInfo, vector<string> &ParamList);
+	virtual BOOL _ReadRawDataInfo(CRawDataInfo *pRawDataInfo, std::vector<std::string> &ParamList);
 };
 
 // 船只部件基本属性表
@@ -359,7 +359,7 @@ protected:
 		SAFE_DELETE(pInfo->pData);
 	}
 
-	virtual BOOL _ReadRawDataInfo(CRawDataInfo *pRawDataInfo, vector<string> &ParamList);
+	virtual BOOL _ReadRawDataInfo(CRawDataInfo *pRawDataInfo, std::vector<std::string> &ParamList);
 };
 
 inline xShipInfo* GetShipInfo( int nTypeID )

@@ -14,7 +14,7 @@ void   fLG(const char *pszName, const char *pszFormat, ...);
 extern "C" void SetLGDir(char const* dir);
 
 // 得到LG输出目录
-void GetLGDir(string& dir);
+void GetLGDir(std::string& dir);
 
 // 使能LG中弹出MessageBox
 extern "C" void EnableMsgBox(bool enable = true);
@@ -113,7 +113,7 @@ public:
     char    m_szDir[255];
     
     void    SetDirectory(const char *pszDir);
-    void    GetDirectory(string& dir);
+    void    GetDirectory(std::string& dir);
 
     void    EnableMsgBox(bool enable /* = true */);
     CLog*   Add(const char *pszName, const char *pszExt = "log");
@@ -130,7 +130,7 @@ public:
 
 private:
     
-    map<string, CLog*>  _LogIdx;
+    std::map<std::string, CLog*>  _LogIdx;
     bool                _bEnable;
     bool                _bEnableMsgBox;
     HWND                _hWnd;

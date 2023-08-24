@@ -8,7 +8,7 @@
 
 #include "CommFunc.h"
 #include "GameCommon.h"
-
+using namespace std;
 const char	*g_szJobName[MAX_JOB_TYPE] = 
 {\
 RES_STRING(CO_COMMFUNC_CPP_00001),\
@@ -564,7 +564,7 @@ bool CTextFilter::Filter(const eFilterTable eTable, string &strText)
 bool CTextFilter::ReplaceText(string &strText, const string *pstrFilterText)
 {
 	bool ret=false;
-	_W64 nPos=strText.find(*pstrFilterText);
+	size_t nPos=strText.find(*pstrFilterText);
 	static const basic_string <char>::size_type errPos = -1;
 	while (nPos!=errPos)
 	{
@@ -586,7 +586,7 @@ bool CTextFilter::ReplaceText(string &strText, const string *pstrFilterText)
 
 bool CTextFilter::bCheckLegalText(const string &strText, const string *pstrIllegalText)
 {
-	_W64 nPos=strText.find(*pstrIllegalText);
+	size_t nPos=strText.find(*pstrIllegalText);
 	static const basic_string <char>::size_type errPos = -1;
 	while (nPos!=errPos)
 	{

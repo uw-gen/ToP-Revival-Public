@@ -6,7 +6,7 @@
 //=============================================================================
 
 #include "SailLvRecord.h"
-
+using namespace std;
 CSailLvRecordSet * CSailLvRecordSet::_Instance = NULL;
 
 BOOL CSailLvRecordSet::_ReadRawDataInfo(CRawDataInfo *pRawDataInfo, vector<string> &ParamList)

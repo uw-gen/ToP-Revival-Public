@@ -6,7 +6,7 @@
 //======================================================================================================================
 
 #include "MonRefRecord.h"
-
+using namespace std;
 CMonRefRecordSet * CMonRefRecordSet::_Instance = NULL;
 
 BOOL CMonRefRecordSet::_ReadRawDataInfo(CRawDataInfo *pRawDataInfo, vector<string> &ParamList)

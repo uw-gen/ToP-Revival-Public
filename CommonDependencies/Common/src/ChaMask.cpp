@@ -48,8 +48,8 @@ bool CMaskData::InitMaskData(char* pszMapName, const char* szBase64Data, long ll
 		}
 		return true;
 	}
-
-	for (int n = 0; n < iMapNum; n++)
+	int n;
+	for (n = 0; n < iMapNum; n++)
 	{
 		pMask = (sMapMask*)pMapData[n];
 

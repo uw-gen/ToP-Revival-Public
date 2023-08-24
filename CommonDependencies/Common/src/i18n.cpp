@@ -1,4 +1,7 @@
 #include ".\i18n.h"
+#include <string>
+
+using std::string;
 
 const char* ConvertResString(const char* str)
 {

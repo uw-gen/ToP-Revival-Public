@@ -9,7 +9,6 @@
 
 #include <map>
 
-using namespace std;
 
 // Use to compare the contents of two pointers
 struct charValueLess
@@ -31,7 +30,7 @@ struct charValueLess
 	}
 };
 
-typedef map <const char*, const char*, charValueLess> StringMap;
+typedef std::map <const char*, const char*, charValueLess> StringMap;
 //typedef map <const char*, const char*, less<const char*> > StringMap;
 
 class CFormatParameter

@@ -5,7 +5,7 @@
 #include <windows.h>
 
 #include <string>
-using namespace std;
+using std::string;
 
 string StringLimit(const string& str,size_t len);
 bool GetNameFormString(const string &str,string &name);

@@ -6,7 +6,7 @@
 //=============================================================================
 
 #include "LevelRecord.h"
-
+using namespace std;
 CLevelRecordSet * CLevelRecordSet::_Instance = NULL;
 
 BOOL CLevelRecordSet::_ReadRawDataInfo(CRawDataInfo *pRawDataInfo, vector<string> &ParamList)

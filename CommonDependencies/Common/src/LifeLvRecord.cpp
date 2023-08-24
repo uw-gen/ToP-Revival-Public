@@ -6,7 +6,7 @@
 //=============================================================================
 
 #include "LifeLvRecord.h"
-
+using namespace std;
 CLifeLvRecordSet * CLifeLvRecordSet::_Instance = NULL;
 
 BOOL CLifeLvRecordSet::_ReadRawDataInfo(CRawDataInfo *pRawDataInfo, vector<string> &ParamList)

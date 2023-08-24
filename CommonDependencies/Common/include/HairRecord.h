@@ -79,7 +79,7 @@ protected:
 	}
     virtual void  _AfterLoad();
 
-	virtual BOOL _ReadRawDataInfo(CRawDataInfo *pRawDataInfo, vector<string> &ParamList);
+	virtual BOOL _ReadRawDataInfo(CRawDataInfo *pRawDataInfo, std::vector<std::string> &ParamList);
 	virtual void _ProcessRawDataInfo(CRawDataInfo *pInfo);
 
 };

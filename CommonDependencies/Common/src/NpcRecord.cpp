@@ -2,7 +2,7 @@
 //---------------------------------------------------------
 
 #include <NpcRecord.h>
-
+using namespace std;
 //---------------------------------------------------------
 
 BOOL CNpcRecordSet::_ReadRawDataInfo(CRawDataInfo *pRawDataInfo, vector<string> &ParamList)

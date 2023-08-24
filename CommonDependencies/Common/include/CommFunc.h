@@ -18,6 +18,7 @@
 #include "NetRetCode.h"
 
 #include "i18n.h"
+using std::string;
 
 extern bool KitbagStringConv(short sKbCapacity, std::string &strData);
 
@@ -575,7 +576,7 @@ private:
 	static bool ReplaceText(string &strText, const string *pstrFilterText);
 	static bool bCheckLegalText(const string &strText, const string *pstrIllegalText);
 
-	static vector<string> m_FilterTable[eTableMax];
+	static std::vector<string> m_FilterTable[eTableMax];
 	static BYTE m_NowSign[eTableMax][8];
 };
 

@@ -6,7 +6,7 @@
 //=============================================================================
 
 #include "SwitchMapRecord.h"
-
+using namespace std;
 CSwitchMapRecordSet * CSwitchMapRecordSet::_Instance = NULL;
 
 BOOL CSwitchMapRecordSet::_ReadRawDataInfo(CRawDataInfo *pRawDataInfo, vector<string> &ParamList)

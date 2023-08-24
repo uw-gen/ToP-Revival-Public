@@ -6,7 +6,7 @@
 //=============================================================================
 
 #include "EventRecord.h"
-
+using namespace std;
 CEventRecordSet * CEventRecordSet::_Instance = NULL;
 
 BOOL CEventRecordSet::_ReadRawDataInfo(CRawDataInfo *pRawDataInfo, vector<string> &ParamList)

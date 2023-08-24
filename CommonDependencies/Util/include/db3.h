@@ -5,7 +5,6 @@
 #include <windows.h>
 #include <sql.h>
 #include <string>
-using namespace std;
 
 // Display Format
 
@@ -127,7 +126,7 @@ private:
     void GetMDY( int& m, int &d, int& y, long jul );
     long GetJulian( int m, int d, int y );
     int  Get4DigitYear( int yy );
-    string GetNumberSuffix( int day );
+    std::string GetNumberSuffix( int day );
     int m_month;
     int m_day;
     int m_year;
@@ -210,9 +209,9 @@ public:
     ~CSQLException() {;}
 
     SQLRETURN m_nRetCode;
-    string m_strError;
-    string m_strStateNativeOrigin;
-    string _statement;
+    std::string m_strError;
+    std::string m_strStateNativeOrigin;
+    std::string _statement;
 
     void Delete() { delete this; }
 private:
@@ -247,7 +246,7 @@ public:
     bool GetAutoCommit();
     bool Commit();
     bool Rollback();
-    string& dbmsName();
+    std::string& dbmsName();
 
     SQLRETURN _rc;    // void*
     SQLHENV   _henv;  // void*
@@ -256,12 +255,12 @@ public:
 
 private:
     bool     _isOpen;
-    string   _dsn;
-    string   _user;
-    string   _pswd;
-    string   _sResult; // for GetSQL... functions
+    std::string   _dsn;
+    std::string   _user;
+    std::string   _pswd;
+    std::string   _sResult; // for GetSQL... functions
     bool     _autoCommit;
-    string   _dbmsName;  // reset at each open
+    std::string   _dbmsName;  // reset at each open
 };
 
 class CSQLDelete : public CSQLBaseWhere 

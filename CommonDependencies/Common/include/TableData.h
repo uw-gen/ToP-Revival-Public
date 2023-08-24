@@ -115,7 +115,7 @@ public:
 	// ´ò°üÓÐ¹Ø
     void			EnablePack(const char *pszPackName);	// ½öÔÚ¶ÁÈë¶þ½øÖÆ×ÊÔ´ÃèÊöÎÄ¼þºóÓÐÐ§
 	void            Pack(const char *pszPackName, const char *pszBinName);
-    void			PackFromDirectory(list<string> &DirList, const char *pszPackName, const char *pszBinName);
+    void			PackFromDirectory(std::list<std::string> &DirList, const char *pszPackName, const char *pszBinName);
     BOOL            IsEnablePack()              { return _bEnablePack; } 
 	
     // ×ÊÔ´¶ÁÈ¡
@@ -128,7 +128,7 @@ protected:
 	virtual void			_DeleteRawDataArray()										    = 0;	
 	virtual int             _GetRawDataInfoSize()										    = 0;
 	virtual void*			_CreateNewRawData(CRawDataInfo *pInfo)					  	    = 0;
-	virtual BOOL			_ReadRawDataInfo(CRawDataInfo *pInfo, vector<string> &ParamList)= 0;
+	virtual BOOL			_ReadRawDataInfo(CRawDataInfo *pInfo, std::vector<std::string> &ParamList)= 0;
 	virtual void			_ProcessRawDataInfo(CRawDataInfo *pInfo)                        {}
 	virtual void			_DeleteRawData(CRawDataInfo *pInfo)							    = 0;
 	virtual BOOL			_IsFull()
@@ -157,8 +157,8 @@ protected:
 	char                        _szPackName[64];
 	BOOL						_bBinary;
     CRawDataInfo*			    _RawDataArray;
-    map<string, CRawDataInfo*>	_IDIdx;
-    list<int>                   _RequestList;
+	std::map<std::string, CRawDataInfo*>	_IDIdx;
+	std::list<int>                   _RequestList;
     BOOL                        _bEnableRequest;
     int                         _nIDLast;
 
@@ -202,7 +202,7 @@ inline CRawDataInfo* CRawDataSet::_GetRawDataInfo(int nID)
 
 inline CRawDataInfo* CRawDataSet::GetRawDataInfo(const char *pszDataName)
 {
-	map<string, CRawDataInfo*>::iterator it = _IDIdx.find(pszDataName);
+	std::map<std::string, CRawDataInfo*>::iterator it = _IDIdx.find(pszDataName);
 
 	if(it!=_IDIdx.end()) // ´ËIDÒÑ¾­´æÔÚ
 	{
@@ -244,7 +244,7 @@ inline int CRawDataSet::GetRawDataID(const char *pszDataName) // ´ÓÃû×Ö»ñÈ¡ID, È
 {
 	CRawDataInfo *pInfo;
 
-    map<string, CRawDataInfo*>::iterator it = _IDIdx.find(pszDataName);
+	std::map<std::string, CRawDataInfo*>::iterator it = _IDIdx.find(pszDataName);
 
 	if(it!=_IDIdx.end()) // ´ËIDÒÑ¾­´æÔÚ
 	{
@@ -348,8 +348,8 @@ inline void CRawDataSet::FrameLoad(int nFrameLoad)
 {
     int nMaxLoadPerFrame = nFrameLoad;
 
-    list<int>::iterator it;
-    list<int> FinishList;
+	std::list<int>::iterator it;
+	std::list<int> FinishList;
     int n = 0;
     for(it = _RequestList.begin(); it!=_RequestList.end(); it++)
     {
@@ -515,7 +515,7 @@ inline void CRawDataSet::_WriteRawDataInfo_Bin(const char *pszFileName)
 inline BOOL CRawDataSet::_LoadRawDataInfo_Txt(const char *pszFileName, int nSep)
 {
 	BOOL bRet = TRUE;
-	ifstream in(pszFileName);
+	std::ifstream in(pszFileName);
     if(in.is_open()==0)
     {
         LG2("error", "msgLoad Raw Data Info Txt File [%s] Fail!\n", pszFileName);
@@ -524,10 +524,10 @@ inline BOOL CRawDataSet::_LoadRawDataInfo_Txt(const char *pszFileName, int nSep)
 	
 const int LINE_SIZE = 2048;
 	char szLine[LINE_SIZE];
-	string* pstrList = new string[_nMaxFieldCnt + 1];
-	string strComment;
+	std::string* pstrList = new std::string[_nMaxFieldCnt + 1];
+	std::string strComment;
 
-	vector<string> ParamList;
+	std::vector<std::string> ParamList;
 
 	// add by claude at 2004-9-1
 	BOOL bSaveFieldCnt = FALSE;
@@ -537,12 +537,12 @@ const int LINE_SIZE = 2048;
     while(!in.eof())
     {
 		in.getline(szLine, LINE_SIZE);
-		string strLine = szLine;
+		std::string strLine = szLine;
 		
 		int p = (int)strLine.find("//");
 		if(p!=-1)
 		{
-			string strLeft = strLine.substr(0, p);
+			std::string strLeft = strLine.substr(0, p);
 			strComment = strLine.substr(p + 2, strLine.size() - p - 2);
 			strLine = strLeft;
 		}
@@ -705,12 +705,12 @@ inline void CRawDataSet::Pack(const char *pszPackName, const char *pszBinName)
 //  ´ÓÄ¿Â¼ÖÐ¶ÁÈ¡ÎÄ¼þ, Ã¿¸öÎÄ¼þ×÷ÎªÒ»¸ö×ÊÔ´, ²¢
 //  Éú³É×ÊÔ´ÃèÊöÐÅÏ¢ÎÄ¼þ xxx.bin
 //--------------------------------------------
-inline void	CRawDataSet::PackFromDirectory(list<string> &DirList, const char *pszPackName, const char *pszBinName)
+inline void	CRawDataSet::PackFromDirectory(std::list<std::string> &DirList, const char *pszPackName, const char *pszBinName)
 {
-	list<string> FileList;
-	for(list<string>::iterator itD = DirList.begin(); itD!=DirList.end(); itD++)
+	std::list<std::string> FileList;
+	for(std::list<std::string>::iterator itD = DirList.begin(); itD!=DirList.end(); itD++)
 	{
-		string strDirName = (*itD);
+		std::string strDirName = (*itD);
 		ProcessDirectory(strDirName.c_str(), &FileList, DIRECTORY_OP_QUERY);
 	}
 	
@@ -719,7 +719,7 @@ inline void	CRawDataSet::PackFromDirectory(list<string> &DirList, const char *ps
 	FILE *fp = fopen(pszPackName, "wb");
 		
 	int i = 0;
-	for(list<string>::iterator it = FileList.begin(); it!=FileList.end(); it++,i++)
+	for(std::list<std::string>::iterator it = FileList.begin(); it!=FileList.end(); it++,i++)
 	{
 		CRawDataInfo *pInfo = GetRawDataInfo(i + _nIDStart);
 		

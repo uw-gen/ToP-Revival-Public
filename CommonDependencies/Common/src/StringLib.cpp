@@ -139,7 +139,7 @@ void ChangeParseSymbol(string &text,int nMaxCount)
 		char szRpl[100];
 		sprintf(szSrc,"#%.2d",i);
 		sprintf(szRpl,"</%.2d>",i);
-		_W64 nPos=text.find(szSrc);
+		size_t nPos=text.find(szSrc);
 		while (nPos>=0)
 		{
 			text.replace(nPos,strlen(szSrc),szRpl);

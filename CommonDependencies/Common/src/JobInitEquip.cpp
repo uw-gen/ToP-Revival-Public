@@ -7,7 +7,7 @@
 
 #include "JobInitEquip.h"
 #include "CommFunc.h"
-
+using namespace std;
 CJobEquipRecordSet * CJobEquipRecordSet::_Instance = NULL;
 
 BOOL CJobEquipRecordSet::_ReadRawDataInfo(CRawDataInfo *pRawDataInfo, vector<string> &ParamList)

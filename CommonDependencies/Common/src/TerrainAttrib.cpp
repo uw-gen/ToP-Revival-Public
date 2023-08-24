@@ -3,7 +3,6 @@
 #include "util.h"
 #include <iostream>
 #include <memory>
-using namespace std;
 
 // 地图文件文件头定义
 struct MPMapFileHeader
@@ -433,15 +432,13 @@ byte CTerrainAttrib::getTileIsland(int nX, int nY)
 #include <memory>
 class CTAMgr
 	{
-	friend class std::auto_ptr;
-
 private:
 	CTAMgr() {ta = new CTerrainAttrib;}
-	~CTAMgr() {delete ta;}
 	CTAMgr(CTAMgr const&) {}
 	CTAMgr& operator =(CTAMgr const&) {}
 
 public:
+	~CTAMgr() { delete ta; }
 	static CTAMgr* Instance();
 
 public:
@@ -451,18 +448,18 @@ public:
 protected:
 private:
 	static CTAMgr* _instance;
-	static std::auto_ptr<CTAMgr> _auto_ptr;
+	static std::unique_ptr<CTAMgr> _auto_ptr;
 	};
 
 CTAMgr* CTAMgr::_instance = NULL;
-std::auto_ptr<CTAMgr> CTAMgr::_auto_ptr;
+std::unique_ptr<CTAMgr> CTAMgr::_auto_ptr;
 
 CTAMgr* CTAMgr::Instance()
 	{
 	if (_instance == NULL)
 		{
 		_instance = new CTAMgr();
-		_auto_ptr = std::auto_ptr<CTAMgr>(_instance);
+		_auto_ptr = std::unique_ptr<CTAMgr>(_instance);
 		}
 
 	return _instance;
@@ -555,7 +552,7 @@ protected:
 inline disk_stuff::disk_stuff(char const* fname, char const* mode)
     {
     _fp = fopen(fname, mode);
-    if (_fp == NULL) throw bad_exception("disk_stuff constructor");
+    if (_fp == NULL) throw std::runtime_error("disk_stuff constructor");
     }
 
 inline disk_stuff::~disk_stuff() {fclose(_fp);}
@@ -565,7 +562,7 @@ inline bool disk_stuff::load() {return true;}
 inline bool disk_stuff::chfile(char const* fname, char const* mode)
     {
     fclose(_fp); _fp = fopen(fname, mode);
-    if (_fp == NULL) throw bad_exception("disk_stuff chfile");
+    if (_fp == NULL) throw std::runtime_error("disk_stuff chfile");
     return true;
     }
 
@@ -581,8 +578,8 @@ public:
 
 inline cache_stuff::cache_stuff(char const* fname, char const* mode)
 try : disk_stuff(fname, mode) {}
-catch (bad_exception& be) {throw be;}
-catch (...) {throw bad_exception("other exception in cache_stuff");};
+catch (std::bad_exception& be) {throw be;}
+catch (...) {throw std::runtime_error("other exception in cache_stuff");};
 
 inline cache_stuff::~cache_stuff() {}
 
@@ -605,8 +602,8 @@ protected:
 
 inline mem_stuff::mem_stuff(char const* fname, char const* mode)
 try : disk_stuff(fname, mode) {_dat = NULL; _len = 0;}
-catch (bad_exception& be) {throw be;}
-catch (...) {throw bad_exception("other exception in mem_stuff");};
+catch (std::bad_exception& be) {throw be;}
+catch (...) {throw std::runtime_error("other exception in mem_stuff");};
 
 inline mem_stuff::~mem_stuff() {if (_dat) delete _dat;}
 
@@ -622,13 +619,13 @@ inline bool mem_stuff::load()
     // allocate the heap
     unsigned char* p;
     try {p = new unsigned char[len];}
-    catch (bad_alloc& ba) {(ba); throw bad_exception("no heap to new");}
-    catch (...) {throw bad_exception("other exception to new in mem_stuff::load");}
+    catch (std::bad_alloc& ba) {(ba); throw std::runtime_error("no heap to new");}
+    catch (...) {throw std::runtime_error("other exception to new in mem_stuff::load");}
 
     // allocate heap successfully, so read all data from disk
     SEEK(0, SEEK_SET);
     if (READ(p, 1, len) < size_t(len))
-        {delete p; throw bad_exception("fread fault in mem_stuff::load");}
+        {delete p; throw std::runtime_error("fread fault in mem_stuff::load");}
 
     // all data read into memory successfully
     _dat = p; _len = len; return true;}
@@ -644,7 +641,7 @@ inline bool mem_stuff::chfile(char const* fname, char const* mode /* = "rb" */)
     SEEK(0, SEEK_SET);
     if (READ(_dat, 1, _len) < size_t(_len))
         {delete _dat; _dat = NULL; 
-        throw bad_exception("fread fault in mem_stuff::chfile");}
+        throw std::runtime_error("fread fault in mem_stuff::chfile");}
 
     return true;}
 
@@ -680,8 +677,8 @@ public:
 
 inline terrain_attr_mem::terrain_attr_mem(char const* fname)
 try : terrain_attr(), mem_stuff(fname, "rb") {load(); _hdr = (terrain_attr_hdr *)_dat;}
-catch (bad_exception& ba) {throw ba;}
-catch (...) {throw bad_exception("exception in terrain_attr_mem constructor");};
+catch (std::bad_exception& ba) {throw ba;}
+catch (...) {throw std::runtime_error("exception in terrain_attr_mem constructor");};
 
 inline terrain_attr_mem::~terrain_attr_mem() {}
 
@@ -725,17 +722,18 @@ inline bool terrain_attr_mem::get_info(unsigned int& width, unsigned int& height
 class tamem_mgr
     {
     friend class cfl_singleton_ap<tamem_mgr>;
-    friend class auto_ptr;
 
 private:
     tamem_mgr() : _ta_map()
         {memset(_ta, NULL, sizeof _ta); _ta_cnt = 0;}
-    ~tamem_mgr()
-        {for (int i = 0; i < _ta_cnt; ++ i) delete _ta[i];}
     tamem_mgr(tamem_mgr const&) {}
     tamem_mgr& operator =(tamem_mgr const&) {}
 
 public:
+	~tamem_mgr()
+	{
+		for (int i = 0; i < _ta_cnt; ++i) delete _ta[i];
+	}
     bool validate(int id)
         {
         if ((id >= 0) && (id < _ta_cnt)) return true;
@@ -774,11 +772,11 @@ protected:
     enum {MAX_MAP = 100};
     int _ta_cnt;
     terrain_attr_mem* _ta[MAX_MAP + 1];
-    map<string, int> _ta_map;
+	std::map<std::string, int> _ta_map;
 
     int _find(char const* fname)
         {
-        map<string, int>::iterator it = _ta_map.find(fname);
+		std::map<std::string, int>::iterator it = _ta_map.find(fname);
         if (it != _ta_map.end()) return (*it).second;
         else return INVALID_INDEX;}
 
@@ -808,7 +806,7 @@ int tamem_mgr::load_map(char const* fname)
 
 int s_openAttribFile(char const* filename)
     {
-    string strfile = filename; strfile += ".atr";
+	std::string strfile = filename; strfile += ".atr";
     return TAM_MGR::instance()->load_map(strfile.c_str());}
 
 bool s_getTileAttrib(int id, unsigned int x, unsigned int y, unsigned short& attrib)

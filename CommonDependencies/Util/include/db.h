@@ -32,7 +32,7 @@ public:
     bool handle_err(SQLHANDLE h, SQLSMALLINT t, RETCODE r, char const* sql = NULL, bool reconn = false);
 
 	bool connect(char* servername, char* database, char* userid, char* passwd,
-                 string& err_info);
+		std::string& err_info);
     SQLHDBC get_dbc() const;
 	void add(cfl_rs* rs);
 	void disconn();
@@ -44,24 +44,24 @@ public:
 	bool rollback();
 
 protected:
-	bool _connect(string& errinfo);
+	bool _connect(std::string& errinfo);
 
 	bool _needreconn(char const* state);
 	bool _reconnt();
 
 private:
-    bool connect(char* source, char* userid, char* passwd, string& err_info);
+    bool connect(char* source, char* userid, char* passwd, std::string& err_info);
 
 	bool _dump_errinfo;
     bool _connected;
-	string _connstr;
+	std::string _connstr;
 
     SQLHENV _henv;
     SQLHDBC _hdbc;
 
-	vector<cfl_rs *> _rslist;
+	std::vector<cfl_rs *> _rslist;
 
-	string _openDatabase;
+	std::string _openDatabase;
 };
 
 inline void cfl_db::enable_errinfo(bool enable /* = true */)
@@ -117,20 +117,20 @@ public:
 	//@TotalPage  int out,--总页数
 	//@TotalRecord int out --总记录数
 	// Add by lark.li 20080809 begin
-	bool	get_page_data(char* tablename, char* param, int pagesize, int pageindex, char* filter, char* sort, int sorttype, int& totalpage, int& totalrecord, vector< vector< string > > &data, unsigned short timeout = 50);
+	bool	get_page_data(char* tablename, char* param, int pagesize, int pageindex, char* filter, char* sort, int sorttype, int& totalpage, int& totalrecord, std::vector< std::vector< std::string > > &data, unsigned short timeout = 50);
 	// End
 
-	bool _get_row(string field_text[], int field_max_cnt, char* param,
+	bool _get_row(std::string field_text[], int field_max_cnt, char* param,
 				  char* filter, int* affect_rows = NULL);
-	bool _get_row2(char const* sql, string field_text[], int field_max_cnt,
+	bool _get_row2(char const* sql, std::string field_text[], int field_max_cnt,
 				   int* rows_got = NULL);
-    bool _get_row3(string field_text[], int field_max_cnt, char* param,
+    bool _get_row3(std::string field_text[], int field_max_cnt, char* param,
                    char* filter, int* affect_rows = NULL);
-    bool _get_rowOderby(string field_text[], int field_max_cnt, char* param,
+    bool _get_rowOderby(std::string field_text[], int field_max_cnt, char* param,
                    char* filter, int* affect_rows = NULL);
 
 	// Add by lark.li 20080528 begin
-	bool	getalldata(const char* sql, vector< vector< string > > &data, unsigned short timeout = 50);
+	bool	getalldata(const char* sql, std::vector< std::vector< std::string > > &data, unsigned short timeout = 50);
 	// End
 
 	// 高级接口
@@ -147,7 +147,7 @@ public:
 
 protected:
     cfl_db* _db;
-    string _tbl_name;
+	std::string _tbl_name;
     int _max_col;
 
     SQLHDBC _hdbc;
@@ -200,10 +200,10 @@ struct friend_dat
 {
     unsigned long memaddr; // VA in GameServer
     unsigned int cha_id; // id of character
-    string relation; // relationship
-    string cha_name; // name of character
+	std::string relation; // relationship
+	std::string cha_name; // name of character
     unsigned int icon_id;
-    string motto;
+	std::string motto;
 };
 
 class friend_tbl : public cfl_rs

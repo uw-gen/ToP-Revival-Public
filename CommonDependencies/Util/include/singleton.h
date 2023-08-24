@@ -11,7 +11,6 @@
 #define _SINGLETON_H_
 
 #include <memory>
-using namespace std;
 
 // nil-mutex :
 //  nothing to do just return
@@ -138,20 +137,20 @@ public:
             {
             static CFL_LOCK locker;
             locker.lock();
-            if (_instance == 0) {_instance = new T; _ap = auto_ptr<T>(_instance);}
+            if (_instance == 0) {_instance = new T; _ap = std::unique_ptr<T>(_instance);}
             locker.unlock();}
         return _instance;}
     static void dump() {std::cout << "instance = " << hex << _instance << std::endl;}
 protected:
     static T* _instance;
-    static auto_ptr<T> _ap;
+    static std::unique_ptr<T> _ap;
     };
 
 template<class T, class CFL_LOCK>
 T* cfl_singleton_ap<T, CFL_LOCK> ::_instance = 0;
 
 template<class T, class CFL_LOCK>
-auto_ptr<T> cfl_singleton_ap<T, CFL_LOCK>::_ap;
+std::unique_ptr<T> cfl_singleton_ap<T, CFL_LOCK>::_ap;
 
 
 // 这个版本的singleton实现很快会被丢弃，因为它不能很容易地被扩充为多线程安全的
@@ -173,14 +172,14 @@ public:
 
 private:
     static T* m_instance;
-    static auto_ptr<T> m_auto_ptr;
+    static std::unique_ptr<T> m_auto_ptr;
     };
 
 template <class T>
 T* CSingleton<T>::m_instance = 0;
 
 template <class T>
-auto_ptr<T> CSingleton<T>::m_auto_ptr;
+std::unique_ptr<T> CSingleton<T>::m_auto_ptr;
 
 template <class T>
 inline T* CSingleton<T>::Instance()
@@ -188,7 +187,7 @@ inline T* CSingleton<T>::Instance()
     if (m_instance == 0)
         {
         m_instance = new T;
-        m_auto_ptr = auto_ptr<T>(m_instance);
+        m_auto_ptr = std::unique_ptr<T>(m_instance);
         }
     return m_instance;
     }
