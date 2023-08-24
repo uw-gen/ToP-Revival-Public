@@ -7,16 +7,6 @@ using namespace client_udp;
 
 namespace client_udp
 {
-	template <class T>
-	class NameIsEqual : public binary_function<T, const char*, bool>
-	{
-	public:
-		bool operator() (const T p, const char* name) const
-		{
-			return strcmp( p->szName, name ) == 0;
-		}
-	};
-
 	CRegionMgr* GetRegionMgr()
 	{
 		static CRegionMgr Mgr;
@@ -126,7 +116,8 @@ CGroupInfo::CGroupInfo( CRegionInfo* pRegion, const char* name )
 
 CGateInfo* CGroupInfo::Find( const char* Name )
 {
-	gates::iterator it = find_if( Gates.begin(), Gates.end(), bind2nd( NameIsEqual<CGateInfo*>(), Name ) );
+	gates::iterator it = find_if(Gates.begin(), Gates.end(), [&Name](CGateInfo* region) {return strcmp(region->szName, Name) == 0; });
+
 	if( it==Gates.end() )
 		return NULL;
 
@@ -207,7 +198,8 @@ CRegionInfo::CRegionInfo( CRegionMgr* Mgr, const char* name )
 
 CGroupInfo*	CRegionInfo::Find( const char* Name )
 {
-	groups::iterator it = find_if( Groups.begin(), Groups.end(), bind2nd( NameIsEqual<CGroupInfo*>(), Name ) );
+	groups::iterator it = find_if(Groups.begin(), Groups.end(), [&Name](CGroupInfo* region) {return strcmp(region->szName, Name) == 0; });
+
 	if( it==Groups.end() )
 		return NULL;
 
@@ -249,7 +241,8 @@ void CRegionMgr::Init( HWND hWnd, UINT uRegeditNetMes )
 
 CRegionInfo* CRegionMgr::Find( const char* Name )
 {
-	regions::iterator it = find_if( _Regions.begin(), _Regions.end(), bind2nd( NameIsEqual<CRegionInfo*>(), Name ) );
+	regions::iterator it = find_if(_Regions.begin(), _Regions.end(), [&Name](CRegionInfo* region) {return strcmp(region->szName, Name) == 0; });
+
 	if( it==_Regions.end() )
 		return NULL;
 
