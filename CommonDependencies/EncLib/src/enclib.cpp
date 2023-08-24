@@ -32,8 +32,8 @@ __byte mapstr(__byte ch)
 
 int str2bin(__byte* buf, int len, const __byte* str, int slen)
 {
-    int spos = 0;
-    for(int i = 0; i < len; i++)
+    int spos = 0, i;
+    for(i = 0; i < len; i++)
     {
         spos = i * 2;
         if(0 >= (slen - spos))
