@@ -66,7 +66,7 @@ void LogStream::Open(bool bakmode)
 		int		l_dircount	=0;
 		cChar	*l_dir =l_path;
 		char	*l_dim1,*l_dim2,*l_dim;
-		while( (l_dim1 =strchr(l_dir,'/')),(l_dim2 =strchr(l_dir,'\\')),(l_dim =min(l_dim1,l_dim2)),
+		while( (l_dim1 = (char*)strchr(l_dir,'/')),(l_dim2 = (char*)strchr(l_dir,'\\')),(l_dim =min(l_dim1,l_dim2)),
 				(l_dim =(l_dim?l_dim:max(l_dim1,l_dim2)))
 				)
 		{

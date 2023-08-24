@@ -11,7 +11,7 @@ _DBC_BEGIN
 
 //------------------------------------------------------------------------------------------------------------------
 //common exception define
-class excp:public exception			//基异常类
+class excp:public std::exception			//基异常类
 {
 public:
 	excp(cChar * desc):exception((_mPtr=new char[strlen(desc)+1])?strcpy(_mPtr,desc):""){}

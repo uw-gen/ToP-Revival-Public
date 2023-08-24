@@ -158,7 +158,8 @@ bool WPacket::WriteChar(uChar ch)
 	{
 		uLong	l_newlen	=( GetPktLen() + sizeof(uChar) ) +( Size() - m_offset ) + ( __bufheap.GetUnitSize() - 1);
 		l_newlen	/=__bufheap.GetUnitSize();
-		for(uLong i=0;l_newlen>i;i+=32);
+		uLong i;
+		for(i=0;l_newlen>i;i+=32);
 		l_newlen			=i*__bufheap.GetUnitSize();
 
 		rbuf * l_buf	=__bufheap.Get(l_newlen);
@@ -183,7 +184,8 @@ bool WPacket::WriteShort(uShort sh)
 	{
 		uLong	l_newlen	=( GetPktLen() + sizeof(uShort) ) +( Size() - m_offset ) + ( __bufheap.GetUnitSize() - 1);
 		l_newlen			/=__bufheap.GetUnitSize();
-		for(uLong i=0;l_newlen>i;i+=32);
+		uLong i;
+		for(i=0;l_newlen>i;i+=32);
 		l_newlen			=i*__bufheap.GetUnitSize();
 
 		rbuf * l_buf		=__bufheap.Get(l_newlen);
@@ -209,7 +211,8 @@ bool WPacket::WriteLong(uLong lo)
 	{
 		uLong	l_newlen	=( GetPktLen() + sizeof(uLong) ) +( Size() - m_offset ) + ( __bufheap.GetUnitSize() - 1);
 		l_newlen			/=__bufheap.GetUnitSize();
-		for(uLong i=0;l_newlen>i;i+=32);
+		uLong i;
+		for(i=0;l_newlen>i;i+=32);
 		l_newlen			=i*__bufheap.GetUnitSize();
 
 		rbuf * l_buf		=__bufheap.Get(l_newlen);
@@ -261,7 +264,8 @@ bool WPacket::WriteSequence(cChar *seq,uShort len)
 	{
 		uLong	l_newlen	=( GetPktLen() + len ) +( Size() - m_offset ) + ( __bufheap.GetUnitSize() - 1);
 		l_newlen			/=__bufheap.GetUnitSize();
-		for(uLong i=0;l_newlen>i;i+=32);
+		uLong i;
+		for(i=0;l_newlen>i;i+=32);
 		l_newlen			=i*__bufheap.GetUnitSize();
 
 		rbuf * l_buf		=__bufheap.Get(l_newlen);
@@ -290,7 +294,8 @@ bool WPacket::WriteFloat(float fVal)
 	{
 		uLong	l_newlen	=( GetPktLen() + sizeof(float) ) +( Size() - m_offset ) + ( __bufheap.GetUnitSize() - 1);
 		l_newlen			/=__bufheap.GetUnitSize();
-		for(uLong i=0;l_newlen>i;i+=32);
+		uLong i;
+		for(i=0;l_newlen>i;i+=32);
 		l_newlen			=i*__bufheap.GetUnitSize();
 
 		rbuf * l_buf		=__bufheap.Get(l_newlen);

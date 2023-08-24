@@ -129,7 +129,7 @@ int NTServiceSet::RegEventLog(NTSvcObject* svc)const
 		SHDeleteKey(HKEY_LOCAL_MACHINE,l_dstr);
 		l_retval =l_retval?l_retval:RegCreateKeyEx(HKEY_LOCAL_MACHINE,l_dstr,0,0,REG_OPTION_NON_VOLATILE,KEY_ALL_ACCESS,0,&l_hkey,0);
 		l_dstr	=svc->SetRCFile()?svc->SetRCFile():(m_argv[0]+1);
-		if(l_str =strchr(l_dstr,'\"'))*l_str =0;
+		if(l_str = (char*)strchr(l_dstr,'\"'))*l_str =0;
 		l_retval =l_retval?l_retval:RegSetValueEx(l_hkey,"EventMessageFile",0,REG_EXPAND_SZ,l_dstr.c_ustr(),DWORD(l_dstr.length()+1));
 		l_retval =l_retval?l_retval:RegSetValueEx(l_hkey,"CategoryMessageFile",0,REG_EXPAND_SZ,l_dstr.c_ustr(),DWORD(l_dstr.length()+1));
 		l_data	=svc->SetNumOfEvtCat();
@@ -144,7 +144,7 @@ int NTServiceSet::RegEventLog(NTSvcObject* svc)const
 		SHDeleteKey(HKEY_LOCAL_MACHINE,l_dstr);
 		l_retval =l_retval?l_retval:RegCreateKeyEx(HKEY_LOCAL_MACHINE,l_dstr,0,0,REG_OPTION_NON_VOLATILE,KEY_ALL_ACCESS,0,&l_hkey,0);
 		l_dstr	=svc->SetRCFile()?svc->SetRCFile():(m_argv[0]+1);
-		if(l_str =strchr(l_dstr,'\"'))*l_str =0;
+		if(l_str = (char*)strchr(l_dstr,'\"'))*l_str =0;
 		l_retval =l_retval?l_retval:RegSetValueEx(l_hkey,"EventMessageFile",0,REG_EXPAND_SZ,l_dstr.c_ustr(),DWORD(l_dstr.length()+1));
 		l_retval =l_retval?l_retval:RegSetValueEx(l_hkey,"CategoryMessageFile",0,REG_EXPAND_SZ,l_dstr.c_ustr(),DWORD(l_dstr.length()+1));
 		l_data	=svc->SetNumOfEvtCat();
@@ -159,7 +159,7 @@ int NTServiceSet::RegEventLog(NTSvcObject* svc)const
 		SHDeleteKey(HKEY_LOCAL_MACHINE,l_dstr);
 		l_retval =l_retval?l_retval:RegCreateKeyEx(HKEY_LOCAL_MACHINE,l_dstr,0,0,REG_OPTION_NON_VOLATILE,KEY_ALL_ACCESS,0,&l_hkey,0);
 		l_dstr	=svc->SetRCFile()?svc->SetRCFile():(m_argv[0]+1);
-		if(l_str =strchr(l_dstr,'\"'))*l_str =0;
+		if(l_str = (char*)strchr(l_dstr,'\"'))*l_str =0;
 		l_retval =l_retval?l_retval:RegSetValueEx(l_hkey,"EventMessageFile",0,REG_EXPAND_SZ,l_dstr.c_ustr(),DWORD(l_dstr.length()+1));
 		l_retval =l_retval?l_retval:RegSetValueEx(l_hkey,"CategoryMessageFile",0,REG_EXPAND_SZ,l_dstr.c_ustr(),DWORD(l_dstr.length()+1));
 		l_data	=svc->SetNumOfEvtCat();

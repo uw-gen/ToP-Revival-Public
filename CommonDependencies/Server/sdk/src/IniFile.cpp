@@ -131,7 +131,8 @@ IniSection & IniFile::operator[](int i){
 }
 
 IniSection &IniFile::operator[](const char *sectname)const{
-	for(int	i =0;i<m_sectcount;i++){
+	int i;
+	for(i =0;i<m_sectcount;i++){
 		if(m_sect[i]->m_sectname	==sectname){
 			break;
 		}
@@ -175,7 +176,8 @@ IniItem & IniSection::operator[](int i){
 	return *l_it;
 }
 dstring &IniSection::operator[](const char *name)const{
-	for(int	i	=0;i<m_itemcount;i++){
+	int	i;
+	for(i	=0;i<m_itemcount;i++){
 		if(m_item[i]->name	==name){
 			break;
 		}
