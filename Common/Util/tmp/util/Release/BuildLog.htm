@@ -1,0 +1,87 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=gb2312">
+</head>
+<body>
+<pre>
+<table width=100% bgcolor=#CFCFE5><tr> <td> <font face=arial size=+3>
+Build Log
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
+<h3>------- Build started: Project: logutil, Configuration: Release|Win32 -------
+</h3>
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Command Lines
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Creating temporary file "d:\KopUnicode\Common\Util\tmp\util\Release\RSP000005.rsp" with contents
+[
+/Od /I "d:\KopUnicode\Common\Util\src\../include" /I "d:\KopUnicode\Common\Util\src\../../ipss/include" /I "d:\KopUnicode\Common\Util\src\../../sdl-1.2.7/include" /I "d:\KopUnicode\Common\Util\src\../../enclib/include" /D "WIN32" /D "NDEBUG" /D "_LIB" /D "_MBCS" /FD /MT /GS /Fo"..\tmp\util\Release/" /Fd"..\lib/util.pdb" /W3 /c /Wp64 /Zi /TC  /EHa
+.\md5c.c
+]
+Creating command line "cl.exe @d:\KopUnicode\Common\Util\tmp\util\Release\RSP000005.rsp /nologo"
+Creating temporary file "d:\KopUnicode\Common\Util\tmp\util\Release\RSP000006.rsp" with contents
+[
+/Od /I "d:\KopUnicode\Common\Util\src\../include" /I "d:\KopUnicode\Common\Util\src\../../ipss/include" /I "d:\KopUnicode\Common\Util\src\../../sdl-1.2.7/include" /I "d:\KopUnicode\Common\Util\src\../../enclib/include" /D "WIN32" /D "NDEBUG" /D "_LIB" /D "_MBCS" /FD /MT /GS /Fo"..\tmp\util\Release/" /Fd"..\lib/util.pdb" /W3 /c /Wp64 /Zi /TP  /EHa
+.\bill.cpp
+]
+Creating command line "cl.exe @d:\KopUnicode\Common\Util\tmp\util\Release\RSP000006.rsp /nologo"
+Creating temporary file "d:\KopUnicode\Common\Util\tmp\util\Release\RSP000007.rsp" with contents
+[
+/OUT:"..\lib/util.lib" /NOLOGO
+\KopUnicode\Common\Util\tmp\util\Release\algo.obj
+\KopUnicode\Common\Util\tmp\util\Release\bill.obj
+\KopUnicode\Common\Util\tmp\util\Release\db.obj
+\KopUnicode\Common\Util\tmp\util\Release\db3.obj
+\KopUnicode\Common\Util\tmp\util\Release\log.obj
+\KopUnicode\Common\Util\tmp\util\Release\log2.obj
+\KopUnicode\Common\Util\tmp\util\Release\logutil.obj
+\KopUnicode\Common\Util\tmp\util\Release\md5c.obj
+\KopUnicode\Common\Util\tmp\util\Release\packet.obj
+\KopUnicode\Common\Util\tmp\util\Release\pch.obj
+\KopUnicode\Common\Util\tmp\util\Release\playsound.obj
+\KopUnicode\Common\Util\tmp\util\Release\util2.obj
+\KopUnicode\Common\Util\tmp\util\Release\ErrorHandler.obj
+\KopUnicode\Common\Util\tmp\util\Release\se_translator.obj
+\KopUnicode\Common\Util\tmp\util\Release\Stacktrace.obj
+\KopUnicode\Common\Util\tmp\util\Release\sym_engine.obj
+\KopUnicode\Common\Util\tmp\util\Release\MapDataVer.obj
+\KopUnicode\Common\Util\tmp\util\Release\MapUtil.obj
+\KopUnicode\Common\Util\tmp\util\Release\SectionData.obj
+]
+Creating command line "lib.exe @d:\KopUnicode\Common\Util\tmp\util\Release\RSP000007.rsp"
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Output Window
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Compiling...
+md5c.c
+md5c.c(349) : warning C4090: 'function' : different 'const' qualifiers
+md5c.c(349) : warning C4013: 'strlen' undefined; assuming extern returning int
+Compiling...
+bill.cpp
+bill.cpp(30) : warning C4101: 'lpBuf' : unreferenced local variable
+bill.cpp(427) : warning C4244: '=' : conversion from 'SOCKET' to 'int', possible loss of data
+bill.cpp(494) : warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+bill.cpp(539) : warning C4267: 'initializing' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(542) : warning C4267: '+=' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(544) : warning C4267: 'initializing' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(585) : warning C4267: 'return' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(590) : warning C4267: 'return' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(595) : warning C4267: 'return' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(600) : warning C4267: 'return' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(624) : warning C4267: 'initializing' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(637) : warning C4267: '=' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(648) : warning C4267: 'initializing' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(649) : warning C4267: 'initializing' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(684) : warning C4267: '=' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(712) : warning C4267: '=' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(735) : warning C4267: '=' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(737) : warning C4267: 'return' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(739) : warning C4267: '=' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(790) : warning C4267: 'initializing' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(808) : warning C4267: 'initializing' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(819) : warning C4267: 'initializing' : conversion from 'size_t' to 'unsigned int', possible loss of data
+bill.cpp(827) : warning C4267: '=' : conversion from 'size_t' to 'unsigned int', possible loss of data
+Creating library...
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Results
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
+Build log was saved at "file://d:\KopUnicode\Common\Util\tmp\util\Release\BuildLog.htm"
+logutil - 0 error(s), 25 warning(s)</pre></table><table   width=100% height=20 bgcolor=#CFCFE5><tr><td><font face=arial size=+2>
+</font></table></body></html>
