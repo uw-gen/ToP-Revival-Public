@@ -239,14 +239,14 @@ inline void PackDirection(const char *pszDir, const char *pszPackFile)
 	
 	// fseek(fp, sizeof(header) + header.dwFileIdxSize * header.dwMaxFileCnt, SEEK_SET);
 	
-	list<string> FileList;
+	std::list<std::string> FileList;
 
 	ProcessDirectory(pszDir, &FileList, DIRECTORY_OP_QUERY);
 
 	DWORD dwMaxFileSize = header.dwMaxFileSection * header.dwSectionSize;
 
 	LPBYTE pbtBuf = new BYTE[dwMaxFileSize];
-	for(list<string>::iterator it = FileList.begin(); it!=FileList.end(); it++)
+	for(std::list<std::string>::iterator it = FileList.begin(); it!=FileList.end(); it++)
 	{
 		const char *pszFile = (*it).c_str();		
 		FILE *fpTmp = fopen(pszFile, "rb");

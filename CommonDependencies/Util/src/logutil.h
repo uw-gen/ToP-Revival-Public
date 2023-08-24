@@ -45,7 +45,7 @@ public:
 protected:
 private:
     HWND m_hWnd; // 本地目的窗口句柄
-	string m_WindowTitle;
+	std::string m_WindowTitle;
     };
 #endif // WIN32
 
@@ -56,7 +56,7 @@ enum {P_RECV, P_SEND, P_OTHER};
 // 使用的LOG方法的标识，可放在包头的dwReserved域
 enum LOG_CALL_TYPE {LG_CALL = 0, GPL_CALL = 1};
 
-class CLogMgr2 : public Singleton<CLogMgr2>
+class CLogMgr2 : public GAME::Singleton<CLogMgr2>
     {
 public:
     CLogMgr2();
@@ -68,7 +68,7 @@ public:
 
 protected:
 private:
-    map<string, CLogMechanism*> m_LogIdx;
+    std::map<std::string, CLogMechanism*> m_LogIdx;
     };
 
 

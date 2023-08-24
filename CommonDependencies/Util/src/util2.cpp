@@ -359,8 +359,8 @@ int  Util_ResolveTextLine(const char *pszText , std::string strList[] ,
 		// 看字符串中是否有两种间隔符
 		char* pszFound1 = NULL;
 		char* pszFound2 = NULL;
-        pszFound1 = strchr(pszText, nSep);
-		pszFound2 = strchr(pszText, nSep2);
+        pszFound1 = (char*)strchr(pszText, nSep);
+		pszFound2 = (char*)strchr(pszText, nSep2);
 
 		if ((pszFound1 == NULL) || (pszFound2 == NULL))
 			{

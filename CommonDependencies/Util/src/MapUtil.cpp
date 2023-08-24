@@ -2,6 +2,7 @@
 #include "MapUtil.h"
 #include "TerrainData.h"
 #include "ObjectData.h"
+using namespace std;
 
 
 // 地图工具函数, 根据文件名, 读入地图数据

@@ -2,7 +2,7 @@
 #include "util.h"
 #include "algo.h"
 #include "md5.h"
-
+using namespace std;
 #pragma warning(disable : 4018 4267)
 
 #define INL inline
@@ -359,7 +359,7 @@ EXIT:
         ret}}
 #endif
 
-bool INL NKD rol_byte_off(byte* pb, unsigned int offset, byte bits)
+bool INL NKD rol_byte_off(::byte* pb, unsigned int offset, ::byte bits)
     {
     __asm {
         push ebx
@@ -386,7 +386,7 @@ EXIT:
         ret
         }}
 
-bool INL NKD ror_byte_off(byte* pb, unsigned int offset, byte bits)
+bool INL NKD ror_byte_off(::byte* pb, unsigned int offset, ::byte bits)
     {
     __asm {
         push ebx
@@ -413,7 +413,7 @@ EXIT:
         ret
         }}
 
-bool INL NKD xor_byte_off(byte* pb, unsigned int offset, byte mask)
+bool INL NKD xor_byte_off(::byte* pb, unsigned int offset, ::byte mask)
     { // xor a byte from a pb and a offset
     __asm {
         push ebx
@@ -448,25 +448,25 @@ bool encrypt_B(char* src, unsigned int src_len, char* key,
         for (j = 0; j < loop; ++ j)
             for (i = 0; i < key_len; ++ i)
                 {
-                xor_byte_off((byte *)p, j * key_len + i, key[i]);
-                rol_byte_off((byte *)p, j * key_len + i, key[i] % key_len + 1);
+                xor_byte_off((::byte *)p, j * key_len + i, key[i]);
+                rol_byte_off((::byte *)p, j * key_len + i, key[i] % key_len + 1);
                 }
             for (i = 0; i < rcnt; ++ i)
                 {
-                xor_byte_off((byte *)p, loop * key_len + i, key[i]);
-                rol_byte_off((byte *)p, loop * key_len + i, key[i] % key_len + 1);
+                xor_byte_off((::byte *)p, loop * key_len + i, key[i]);
+                rol_byte_off((::byte *)p, loop * key_len + i, key[i] % key_len + 1);
                 }}
     else{
         p = src;
         for (j = 0; j < loop; ++ j)
             for (i = 0; i < key_len; ++ i)
                 {
-                ror_byte_off((byte *)p, j * key_len + i, key[i] % key_len + 1);
-                xor_byte_off((byte *)p, j * key_len + i, key[i]);}
+                ror_byte_off((::byte *)p, j * key_len + i, key[i] % key_len + 1);
+                xor_byte_off((::byte *)p, j * key_len + i, key[i]);}
             for (i = 0; i < rcnt; ++ i)
                 {
-                ror_byte_off((byte *)p, loop * key_len + i, key[i] % key_len + 1);
-                xor_byte_off((byte *)p, loop * key_len + i, key[i]);}}
+                ror_byte_off((::byte *)p, loop * key_len + i, key[i] % key_len + 1);
+                xor_byte_off((::byte *)p, loop * key_len + i, key[i]);}}
     return true;}
 #endif
 

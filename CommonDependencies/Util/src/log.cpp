@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "log.h"
 #include "util2.h"
+using namespace std;
 
 #ifdef _DEBUG
 #ifdef _GAMECORE

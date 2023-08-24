@@ -6,6 +6,7 @@
 #include <time.h>
 #include <assert.h>
 #include <sqlext.h>
+using namespace std;
 
 const int TDt::FULL       =  1;
 const int TDt::EUROPEAN   =  2;
@@ -496,7 +497,7 @@ TDt& TDt::Set( const char* a_p )
             return Set( Month, Day, Get4DigitYear( Year ) );
         }
 
-        for ( n=0; n < len; n++ )
+        for (int n=0; n < len; n++ )
             if ( p[n] == '-' )
                 p[n] = '/';
 

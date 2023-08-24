@@ -7,6 +7,7 @@
 #include "pch.h"
 #include "packet.h"
 #include <memory>
+using namespace std;
 
 /////////////////////////////////////////////////////
 CLogString::CLogString()

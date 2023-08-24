@@ -1,5 +1,6 @@
 #include "util.h"
 #include "db.h"
+using namespace std;
 
 #define SQLERR_FORMAT "SQL Error State:%s, Native Error Code: %lX, ODBC Error: %s\n"
 #define COLTRUNC_WARNG "Number of columns in display truncated to %u\n"
@@ -1468,7 +1469,7 @@ bool cfl_rs::getalldata(const char* sql, vector< vector< string > >& data, unsig
             }
 
             // Fetch each Row
-            for (i = 0; ((sqlret = SQLFetch(hstmt)) == SQL_SUCCESS) || (sqlret == SQL_SUCCESS_WITH_INFO); ++ i)
+            for (int i = 0; ((sqlret = SQLFetch(hstmt)) == SQL_SUCCESS) || (sqlret == SQL_SUCCESS_WITH_INFO); ++ i)
             {
 				vector< string > rowV;
 
@@ -1579,7 +1580,7 @@ bool cfl_rs::get_page_data(char* tablename, char* param, int pagesize, int pagei
             }
 
             // Fetch each Row
-            for (i = 0; ((sqlret = SQLFetch(hstmt)) == SQL_SUCCESS) || (sqlret == SQL_SUCCESS_WITH_INFO); ++ i)
+            for (int i = 0; ((sqlret = SQLFetch(hstmt)) == SQL_SUCCESS) || (sqlret == SQL_SUCCESS_WITH_INFO); ++ i)
             {
 				vector< string > rowV;
 
@@ -1892,6 +1893,7 @@ bool friend_tbl::get_friend_dat(friend_dat* farray, int& array_num, unsigned int
             }
 
             // Fetch each Row
+            int i;
             for (i = 0; ((sqlret = SQLFetch(hstmt)) == SQL_SUCCESS) || (sqlret == SQL_SUCCESS_WITH_INFO); ++ i)
             {
                 if (i >= array_num)

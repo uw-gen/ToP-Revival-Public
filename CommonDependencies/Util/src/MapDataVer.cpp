@@ -3,7 +3,8 @@
 #include "ObjectData.h"
 #include "AttribData.h"
 #include "MPMapDef.h"
-//
+using namespace std;
+
 #define LW_RGB555_R(rgb) (BYTE)( ( rgb & 0x7c00) >> 7 )
 #define LW_RGB555_G(rgb) (BYTE)( ( rgb & 0x3e0) >> 2 )
 #define LW_RGB555_B(rgb) (BYTE)( ( rgb & 0x1f) << 3 )

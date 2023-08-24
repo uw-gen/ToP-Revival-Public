@@ -196,7 +196,7 @@ int CLanguageRecord::Find(const char* _str, const char* _find)
 {
     char* __ptr = 0;
 
-    __ptr = strstr(_str, _find);
+    __ptr = (char*)strstr(_str, _find);
     if(__ptr)
     {
         return (int)(__ptr - _str + 1);

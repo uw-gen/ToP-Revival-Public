@@ -671,9 +671,9 @@ int wave_cache_find(char const* fname)
     int id = WAV_CACHE_ID_START;
     DWORD time_stamp = wave_cache_dat_array[id].time_stamp;
     bool found = false;
-    int found_id;
+    int found_id, i;
 
-    for (int i = WAV_CACHE_ID_START; i <= WAV_CACHE_ID_END; ++ i)
+    for (i = WAV_CACHE_ID_START; i <= WAV_CACHE_ID_END; ++ i)
         {
         p = &wave_cache_dat_array[i];
         if (!p->used) break;
@@ -918,8 +918,8 @@ bool no_use = MUS_MGR::instance()->init();
 bool env_snd_is_full()
     {
     if (!is_env_snd_enable()) return true;
-
-    for (int i = ENV_SND_ID_START; i <= ENV_SND_ID_END; ++ i)
+    int i;
+    for (i = ENV_SND_ID_START; i <= ENV_SND_ID_END; ++ i)
         {
         if (!is_used(i)) break;}
 
@@ -928,8 +928,8 @@ bool env_snd_is_full()
 int env_snd_add(char const* fname)
     {
     if (!is_env_snd_enable()) return -1;
-
-    for (int i = ENV_SND_ID_START; i <= ENV_SND_ID_END; ++ i)
+    int i;
+    for (i = ENV_SND_ID_START; i <= ENV_SND_ID_END; ++ i)
         {
         if (!is_used(i))
             {
@@ -964,8 +964,8 @@ void cmn_snd_set_cache(int n /* = 20 */) {}
 bool cmn_snd_play(char const* fname, int vol)
     {
     if (!is_cmn_snd_enable()) return false;
-
-    for (int i = CMN_SND_ID_START; i < CMN_SND_ID_END; ++ i)
+    int i;
+    for (i = CMN_SND_ID_START; i < CMN_SND_ID_END; ++ i)
         {
         if (!is_used(i)) break;}
     if (i > CMN_SND_ID_END) return false;

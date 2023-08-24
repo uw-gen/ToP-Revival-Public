@@ -56,8 +56,8 @@ public:
     void operator >>(LOGPACKETHDR& hdr);
     void operator <<(CLogString& lstr);
     void operator >>(CLogString& lstr);
-	void operator <<(string& lstr);
-	void operator >>(string& lstr);
+	void operator <<(std::string& lstr);
+	void operator >>(std::string& lstr);
     void operator <<(COPYDATASTRUCT& cds);
     void operator >>(COPYDATASTRUCT& cds);
 
