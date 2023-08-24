@@ -1,5 +1,5 @@
 
-#include "../inc/AudioSDL.h"
+#include "AudioSDL.h"
 #include "AudioResource.h"
 #include "SDL_Wrapper.h"
 
