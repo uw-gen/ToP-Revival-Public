@@ -46,12 +46,12 @@ add_subdirectory(
 
 add_subdirectory(
   ${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/ICUHelper/
-  ${CMAKE_CURRENT_SOURCE_DIR}../../CommonDependencies/ICUHelper/build/
+  ${CMAKE_CURRENT_SOURCE_DIR}../../../CommonDependencies/ICUHelper/build/
 )
 
 add_subdirectory(
   ${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/Util/
-  ${CMAKE_CURRENT_SOURCE_DIR}../../CommonDependencies/Util/build/
+  ${CMAKE_CURRENT_SOURCE_DIR}../../../CommonDependencies/Util/build/
 )
 
 target_link_libraries(AccountServer PRIVATE
@@ -160,3 +160,8 @@ add_custom_command(TARGET AccountServer POST_BUILD
   "${CMAKE_CURRENT_SOURCE_DIR}/Configuration/AccountServer.loc"
   "$<TARGET_FILE_DIR:AccountServer>"
 )
+
+set(BUILD_TYPE "SERVER")
+
+set(CMAKE_EXE_LINKER_FLAGS_DEBUGSERVER "")
+set(CMAKE_EXE_LINKER_FLAGS_RELEASESERVER "")
