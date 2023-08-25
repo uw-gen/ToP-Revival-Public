@@ -20,7 +20,6 @@
 
 #define AUTHUPDATE_TIMER 1
 #define GROUPUPDATE_TIMER 2
-
 ThreadPool* comm = NULL;
 ThreadPool* proc = NULL;
 AuthThreadPool atp;

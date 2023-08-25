@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.26.4)
 
 project(NetworkingSDK)
 
-set(SOURCE_FILES_DIR "../src")
+set(SOURCE_FILES_DIR ${CMAKE_CURRENT_SOURCE_DIR}"../src")
 set(SOURCE_FILES 
 ${SOURCE_FILES_DIR}/AcceptConnect.cpp
 ${SOURCE_FILES_DIR}/Comm.cpp

@@ -1280,6 +1280,24 @@ bool CSQLDatabase::SQLConnect(char const* conn_instr)
         (SQLCHAR *)conn_outstr, SQL_NTS, &outstr_len, SQL_DRIVER_NOPROMPT);
     
     _isOpen = ( _rc == SQL_SUCCESS || _rc == SQL_SUCCESS_WITH_INFO );
+
+    SQLSMALLINT iRec = 0;
+    SQLINTEGER  iError;
+    SQLCHAR       szMessage[1000];
+    SQLCHAR       szState[SQL_SQLSTATE_SIZE + 1];
+
+    while (SQLGetDiagRec(SQL_HANDLE_DBC,
+        _hdbc,
+        ++iRec,
+        szState,
+        &iError,
+        szMessage,
+        (SQLSMALLINT)(sizeof(szMessage) / sizeof(char)),
+        (SQLSMALLINT*)NULL) == SQL_SUCCESS)
+    {
+        fprintf(stderr, "[%5.5s] %s (%d)\n", szState, szMessage, iError);
+    }
+
     return _isOpen;
 }
 

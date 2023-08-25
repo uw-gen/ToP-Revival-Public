@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.26.4)
 
 project(UtilLib)
 
-set(SOURCE_FILES_DIR "../src")
+set(SOURCE_FILES_DIR "${CMAKE_CURRENT_SOURCE_DIR}../src")
 set(SOURCE_FILES 
 ${SOURCE_FILES_DIR}/algo.cpp
 ${SOURCE_FILES_DIR}/Big5.cpp

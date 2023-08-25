@@ -13,6 +13,7 @@
 
 CDataBaseCtrl::CDataBaseCtrl(void)
 {
+	driverVersion_ = "";
 	m_strServerIP="";
 	m_strServerDB="";
 	m_strUserID="";
@@ -37,6 +38,8 @@ bool CDataBaseCtrl::CreateObject()
 	std::string strTmp = "";
 	try
 	{
+		sprintf(buf, "SQL_driverVersion");
+		driverVersion_ = is[buf].c_str();
 		sprintf(buf, "dbserver");
 		m_strServerIP = is[buf].c_str();
 		sprintf(buf, "db");
@@ -116,7 +119,7 @@ bool CDataBaseCtrl::Connect()
 
 	//连接数据库
 	char buf[512] = {0};
-	sprintf(buf, "DRIVER={SQL Server};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s", 
+	sprintf(buf, "DRIVER={%s};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s;", driverVersion_.c_str(),
 		m_strServerIP.c_str(), m_strUserID.c_str(), m_strUserPwd.c_str(), m_strServerDB.c_str());
 
 	if (!m_pDataBase->Open(buf))

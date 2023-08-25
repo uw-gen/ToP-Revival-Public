@@ -622,10 +622,6 @@ void LoginTmpList::UnLock()
 
 // AuthThread
 Sema AuthThread::m_Sema(0, AuthThreadPool::AT_MAXNUM);
-std::string AuthThread::m_strSrvip = "";
-std::string AuthThread::m_strSrvdb = "";
-std::string AuthThread::m_strUserId = "";
-std::string AuthThread::m_strUserPwd = "";
 std::string AuthThread::m_strAccountTableName="account_login";
 AuthThread::AuthThread(int nIndex) : m_pAuth(NULL), m_nIndex(nIndex) {}
 AuthThread::~AuthThread() {Exit();}
@@ -671,8 +667,8 @@ bool AuthThread::Connect()
     // 连接database
     char conn_str[512] = {0};
     char const* conn_fmt = "DRIVER={SQL Server};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s";
-    sprintf(conn_str, conn_fmt, m_strSrvip.c_str(), m_strUserId.c_str(),
-            m_strUserPwd.c_str(), m_strSrvdb.c_str());
+    sprintf(conn_str, conn_fmt, serverIP_.c_str(), sqlUserId_.c_str(),
+		sqUserPassword_.c_str(), databaseName_.c_str());
     ret = m_pAuth->Open(conn_str);
     if (ret) {
         m_pAuth->SetAutoCommit(true);
@@ -708,26 +704,27 @@ void AuthThread::Reconnt()
 void AuthThread::LoadConfig()
 {
     char buf[80];
-    IniFile inf(g_strCfgFile.c_str());
-    IniSection& is = inf["db"];
+	dbc::IniFile inf(g_strCfgFile.c_str());
+	dbc::IniSection& is = inf["db"];
     std::string strTmp = "";
 
     try {
+		//Lovely "Static Initialization Order Fiasco" issue
+		// Ref: https://en.cppreference.com/w/cpp/language/siof
         sprintf(buf, "dbserver");
-        m_strSrvip = is[buf].c_str();
+        this->serverIP_ = is[buf].c_str();
         sprintf(buf, "db");
-        m_strSrvdb = is[buf].c_str();
+		this->databaseName_ = is[buf].c_str();
         sprintf(buf, "userid");
-        m_strUserId = is[buf].c_str();
+		this->sqlUserId_ = is[buf].c_str();
         sprintf(buf, "passwd");
         strTmp = is[buf].c_str();
-        //m_strUserPwd = strTmp;
     } catch (excp& e) {
         cout << e.what() << endl;
         getchar();
         ExitProcess(-1);
     }
-    dbpswd_out(strTmp.c_str(), (int)strTmp.length(), m_strUserPwd);
+    dbpswd_out(strTmp.c_str(), (int)strTmp.length(), this->sqUserPassword_);
     //  TOM表名已修改
 	//if (g_TomService.IsEnable())
 	//{
@@ -1755,8 +1752,10 @@ AuthThreadPool::AuthThreadPool()
 {
     for (int i = 0; i < AT_MAXNUM; ++ i) {
         m_Pool[i] = new AuthThread(i);
+		m_Pool[i]->LoadConfig();
     }
-    AuthThread::LoadConfig();
+
+    //AuthThread::LoadConfig();
 }
 AuthThreadPool::~AuthThreadPool()
 {
