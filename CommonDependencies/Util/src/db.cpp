@@ -323,8 +323,7 @@ bool cfl_db::connect(char* source, char* userid, char* passwd, string& err_info)
     return ret;
 }
 
-bool cfl_db::connect(char* servername, char* database, char* userid, char* passwd,
-                     string& err_info)
+bool cfl_db::connect(const std::string& driverVersion, const char* serverName, const char* database, const char* userId, const char* passwd, string& err_info)
 {
     if (_connected)
     {
@@ -332,18 +331,17 @@ bool cfl_db::connect(char* servername, char* database, char* userid, char* passw
         return false;
     }
 
-	char conn_str[1024];    
-    sprintf(conn_str, "DRIVER={SQL Server};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s",
-            servername, userid, passwd, database);
+    char conn_str[1024];
+    sprintf(conn_str, "DRIVER={%s};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s", driverVersion.c_str(), serverName, userId, passwd, database);
 
-	// Save connect string
-	_connstr = conn_str;
+    // Save connect string
+    _connstr = conn_str;
 
-	// Add by lark.li 20080902 begin
-	_openDatabase = string("use ") + string(database) + string(";");
-	// End
+    // Add by lark.li 20080902 begin
+    _openDatabase = string("use ") + string(database) + string(";");
+    // End
 
-	return _connect(err_info);
+    return _connect(err_info);
 }
 
 void cfl_db::disconn()

@@ -31,8 +31,7 @@ public:
     bool is_errinfo_enable() const;
     bool handle_err(SQLHANDLE h, SQLSMALLINT t, RETCODE r, char const* sql = NULL, bool reconn = false);
 
-	bool connect(char* servername, char* database, char* userid, char* passwd,
-		std::string& err_info);
+	bool connect(const std::string& driverVersion, const char* serverName, const char* database, const char* userId, const char* passwd, std::string& err_info);
     SQLHDBC get_dbc() const;
 	void add(cfl_rs* rs);
 	void disconn();

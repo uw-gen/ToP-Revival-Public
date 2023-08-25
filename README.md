@@ -26,18 +26,18 @@ cmake --help
 ```
 scroll up to *Generators*, pick up your favored version of VS, Here I'll use VS 2022 (infact it is marked with an * (asterisk), as the default generator), now type:
 ```sh
-cmake -G"<GENERATOR>" -H<SOURCE_DIR> -B<BUILD_DIR>
+cmake -G"<GENERATOR>" -H<SOURCE_DIR> -B<BUILD_DIR> -A<Platform_Architecture>
 ```
 in my case I'll use this:
 ```sh
-cmake.exe -G"Visual Studio 17 2022" -H. -B./build
+cmake.exe -G"Visual Studio 17 2022" -H. -B./build -AWin32
 ```
 
-Notice how I replaced `<GENERATOR>` with my Generator in double quotes, `<SOURCE_DIR>` with a (dot) `.` (and no spaces), since we're on the same directory as CMakeLists.txt we can refer to the `<SOURCE_DIR>` as `.`, and for `<BUILD_DIR>` I recommend that you use `/build` directory consistently, since some projects here depend on that folder.
+Notice how I replaced `<GENERATOR>` with my Generator in double quotes, `<SOURCE_DIR>` with a (dot) `.` (and no spaces), since we're on the same directory as CMakeLists.txt we can refer to the `<SOURCE_DIR>` as `.`, and for `<BUILD_DIR>` I recommend that you use `/build` directory consistently, since some projects here depend on that folder. (`<Platform_Architecture>` should always be `Win32`, since binaries only support 32 bit architecture)
 
 or even shorter
 ```sh
-cmake.exe -H. -B./build # Using the generator that's marked with * (asterisk), the default.
+cmake.exe -H. -B./build -AWin32 # Using the generator that's marked with * (asterisk), the default.
 ```
 
 After that you'll find your .sln (VS project) in `/build` directory, go ahead and compile the project with **VS** we're done here!
@@ -55,7 +55,7 @@ Repeat the process with any project you wanna build from this repo.
 |---------|:---------:|---------|
 | AccountServer | :white_check_mark: | 17 
 | GameServer  | :x: | N/A 
-| GroupServer | :x: | N/A 
+| GroupServer | :white_check_mark: | 17 
 | GateServer  | :white_check_mark: | 17 
 | InfoServer  | :x: | N/A 
 | TradeSystem | :x: | N/A 
