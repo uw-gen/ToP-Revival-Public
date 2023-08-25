@@ -54,7 +54,7 @@ Repeat the process with any project you wanna build from this repo.
 | Project | Ported? | CPP Version
 |---------|:---------:|---------|
 | AccountServer | :white_check_mark: | 17 
-| GameServer  | :x: | N/A 
+| GameServer  | :white_check_mark: | 17 
 | GroupServer | :white_check_mark: | 17 
 | GateServer  | :white_check_mark: | 17 
 | InfoServer  | :x: | N/A 

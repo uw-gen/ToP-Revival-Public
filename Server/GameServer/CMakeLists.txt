@@ -1,50 +1,90 @@
 cmake_minimum_required(VERSION 3.26.4)
 
-project(GroupServer)
+project(GameServer)
 
 set(SOURCE_FILES_DIR "../src")
 set(SOURCE_FILES 
-  ${SOURCE_FILES_DIR}/GroupSMain.cpp
-  ${SOURCE_FILES_DIR}/TeamMember.cpp
-  ${SOURCE_FILES_DIR}/Team.cpp
-  ${SOURCE_FILES_DIR}/SessionChat.cpp
-  ${SOURCE_FILES_DIR}/Script.cpp
-  ${SOURCE_FILES_DIR}/Player.cpp
-  ${SOURCE_FILES_DIR}/Parser.cpp
-  ${SOURCE_FILES_DIR}/Master.cpp
-  ${SOURCE_FILES_DIR}/LuaFunc.cpp
-  ${SOURCE_FILES_DIR}/Invitation.cpp
-  ${SOURCE_FILES_DIR}/GuildMember.cpp
+  ${SOURCE_FILES_DIR}/GameSMain.cpp
+  ${SOURCE_FILES_DIR}/Action.cpp
+  ${SOURCE_FILES_DIR}/Attachable.cpp
+  ${SOURCE_FILES_DIR}/AttachManage.cpp
+  ${SOURCE_FILES_DIR}/Auction.cpp
+  ${SOURCE_FILES_DIR}/AuctionItem.cpp
+  ${SOURCE_FILES_DIR}/Birthplace.cpp
+  ${SOURCE_FILES_DIR}/cfl_iocp.cpp
+  ${SOURCE_FILES_DIR}/cfl_lock.cpp
+  ${SOURCE_FILES_DIR}/Character.cpp
+  ${SOURCE_FILES_DIR}/CharacterAI.cpp
+  ${SOURCE_FILES_DIR}/CharacterAIState.cpp
+  ${SOURCE_FILES_DIR}/CharacterCmd.cpp
+  ${SOURCE_FILES_DIR}/CharacterPacket.cpp
+  ${SOURCE_FILES_DIR}/CharacterPrl.cpp
+  ${SOURCE_FILES_DIR}/CharacterRun.cpp
+  ${SOURCE_FILES_DIR}/CharacterSuperCmd.cpp
+  ${SOURCE_FILES_DIR}/CharBoat.cpp
+  ${SOURCE_FILES_DIR}/CharForge.cpp
+  ${SOURCE_FILES_DIR}/CharScript.cpp
+  ${SOURCE_FILES_DIR}/CharStall.cpp
+  ${SOURCE_FILES_DIR}/CharTrade.cpp
+  ${SOURCE_FILES_DIR}/Config.cpp
+  ${SOURCE_FILES_DIR}/Entity.cpp
+  ${SOURCE_FILES_DIR}/EntityAlloc.cpp
+  ${SOURCE_FILES_DIR}/EntityScript.cpp
+  ${SOURCE_FILES_DIR}/EntitySpawn.cpp
+  ${SOURCE_FILES_DIR}/EventCalculate.cpp
+  ${SOURCE_FILES_DIR}/EventEntity.cpp
+  ${SOURCE_FILES_DIR}/EventHandler.cpp
+  ${SOURCE_FILES_DIR}/EyeshotCell.cpp
+  ${SOURCE_FILES_DIR}/FightAble.cpp
+  ${SOURCE_FILES_DIR}/FindPath.cpp
+  ${SOURCE_FILES_DIR}/GameApp.cpp
+  ${SOURCE_FILES_DIR}/GameAppNet.cpp
+  ${SOURCE_FILES_DIR}/GameDB.cpp
+  ${SOURCE_FILES_DIR}/GameServerApp.cpp
+  ${SOURCE_FILES_DIR}/gmsvr.cpp
   ${SOURCE_FILES_DIR}/Guild.cpp
-  ${SOURCE_FILES_DIR}/GroupServerAppTeam.cpp
-  ${SOURCE_FILES_DIR}/GroupServerAppServ.cpp
-  ${SOURCE_FILES_DIR}/GroupServerAppPrsn.cpp
-  ${SOURCE_FILES_DIR}/GroupServerAppMaster.cpp
-  ${SOURCE_FILES_DIR}/GroupServerAppInit.cpp
-  ${SOURCE_FILES_DIR}/GroupServerAppGuld.cpp
-  ${SOURCE_FILES_DIR}/GroupServerAppFrnd.cpp
-  ${SOURCE_FILES_DIR}/GroupServerAppChat.cpp
-  ${SOURCE_FILES_DIR}/GroupServerApp.cpp
-  ${SOURCE_FILES_DIR}/Friend.cpp
-  ${SOURCE_FILES_DIR}/DBConnect.cpp
+  ${SOURCE_FILES_DIR}/HarmRec.cpp
+  ${SOURCE_FILES_DIR}/Item.cpp
+  ${SOURCE_FILES_DIR}/lua_gamectrl.cpp
+  ${SOURCE_FILES_DIR}/MapEntry.cpp
+  ${SOURCE_FILES_DIR}/MapRes.cpp
+  ${SOURCE_FILES_DIR}/MapTrigger.cpp
+  # ${SOURCE_FILES_DIR}/MgrUnit.cpp
+  ${SOURCE_FILES_DIR}/Mission.cpp
+  ${SOURCE_FILES_DIR}/MoveAble.cpp
+  ${SOURCE_FILES_DIR}/NPC.cpp
+  ${SOURCE_FILES_DIR}/NpcScript.cpp
+  # ${SOURCE_FILES_DIR}/OuterServer.cpp
+  ${SOURCE_FILES_DIR}/Parser.cpp
+  ${SOURCE_FILES_DIR}/PicSet.cpp
+  ${SOURCE_FILES_DIR}/Picture.cpp
+  ${SOURCE_FILES_DIR}/Player.cpp
+  ${SOURCE_FILES_DIR}/Script.cpp
+  ${SOURCE_FILES_DIR}/StackWalker.cpp
+  ${SOURCE_FILES_DIR}/StateCell.cpp
+  ${SOURCE_FILES_DIR}/SubMap.cpp
+  ${SOURCE_FILES_DIR}/SystemDialog.cpp
+  ${SOURCE_FILES_DIR}/TradeLogDB.cpp
+  ${SOURCE_FILES_DIR}/Weather.cpp
+  ${SOURCE_FILES_DIR}/WorldEudemon.cpp
+  ${SOURCE_FILES_DIR}/xString.cpp
 )
 
-add_executable(GroupServer ${SOURCE_FILES})
-
-target_compile_features(GroupServer PRIVATE cxx_std_17)
+add_executable(GameServer ${SOURCE_FILES})
+target_sources(GameServer PRIVATE ${SOURCE_FILES_DIR}/GameServer.rc)
 
 set(DEPENDENCY_DIRS 
   "./include"
   "../../CommonDependencies/Server/sdk/include"
-  "../../CommonDependencies/Util/include"
   "../../CommonDependencies/Common/include"
+  "../../CommonDependencies/Util/include"
   "../../CommonDependencies/ICUHelper/inc"
   "../../CommonDependencies/icu/include"
   "../../CommonDependencies/CaLua/include"
 )
-target_include_directories(GroupServer PRIVATE ${DEPENDENCY_DIRS})
+target_include_directories(GameServer PRIVATE ${DEPENDENCY_DIRS})
 
-set_property(TARGET GroupServer PROPERTY
+set_property(TARGET GameServer PROPERTY
   MSVC_RUNTIME_LIBRARY 
   "MultiThreaded$<$<CONFIG:DebugServer>:Debug>"
 )
@@ -78,14 +118,19 @@ add_subdirectory(
   ${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/Common
   ${CMAKE_CURRENT_SOURCE_DIR}../../../CommonDependencies/Common/build/
 )
+add_subdirectory(
+  ${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/InfoNet
+  ${CMAKE_CURRENT_SOURCE_DIR}../../../CommonDependencies/InfoNet/build/
+)
 
-target_link_libraries(GroupServer PRIVATE
+target_link_libraries(GameServer PRIVATE
   NetworkingSDK 
   ICUHelper 
   UtilLib
   Lua50
   LuaLib
   Common
+  InfoNet
   ${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/icu/lib/icudt.lib
   ${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/icu/lib/icuuc.lib
   ${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/icu/lib/icuin.lib
@@ -117,7 +162,12 @@ set_property(TARGET Common PROPERTY
   "MultiThreaded$<$<CONFIG:DebugServer>:Debug>"
 )
 
-target_compile_definitions(GroupServer PRIVATE
+set_property(TARGET InfoNet PROPERTY
+  MSVC_RUNTIME_LIBRARY 
+  "MultiThreaded$<$<CONFIG:DebugServer>:Debug>"
+)
+
+target_compile_definitions(GameServer PRIVATE
   $<$<CONFIG:DebugServer>:_CONSOLE>
   $<$<CONFIG:DebugServer>:WIN32>
   $<$<CONFIG:DebugServer>:_DEBUG>
@@ -127,7 +177,7 @@ target_compile_definitions(GroupServer PRIVATE
   $<$<CONFIG:ReleaseServer>:NDEBUG>
 )
 
-target_compile_options(GroupServer PUBLIC
+target_compile_options(GameServer PUBLIC
   "$<$<CONFIG:DebugServer>:/Zi>"
   "$<$<CONFIG:DebugServer>:/Ob0>"
   "$<$<CONFIG:DebugServer>:/Od>"
@@ -169,59 +219,60 @@ target_compile_options(Common PUBLIC
   "$<$<CONFIG:DebugServer>:/RTC1>"
 )   
 
+target_compile_options(InfoNet PUBLIC
+  "$<$<CONFIG:DebugServer>:/Zi>"
+  "$<$<CONFIG:DebugServer>:/Ob0>"
+  "$<$<CONFIG:DebugServer>:/Od>"
+  "$<$<CONFIG:DebugServer>:/RTC1>"
+)   
 
-target_link_options(GroupServer PUBLIC
+
+target_link_options(GameServer PUBLIC
   "$<$<CONFIG:DebugServer>:/DEBUG:FULL>"
 )  
 
-
-set_target_properties(GroupServer PROPERTIES 
+set_target_properties(GameServer PROPERTIES 
   VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>
-  VS_DEBUGGER_COMMAND_ARGUMENTS "GroupServer.cfg"
+  VS_DEBUGGER_COMMAND_ARGUMENTS "GameServer.cfg"
 ) 
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT GroupServer)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT GameServer)
 
-add_custom_command(TARGET GroupServer POST_BUILD        
+add_custom_command(TARGET GameServer POST_BUILD        
   COMMAND ${CMAKE_COMMAND} -E copy_if_different
   "${CMAKE_CURRENT_SOURCE_DIR}/../../LanguageResource/en_US.res"
-  "$<TARGET_FILE_DIR:GroupServer>"
+  "$<TARGET_FILE_DIR:GameServer>"
 )
 
-add_custom_command(TARGET GroupServer POST_BUILD        
+add_custom_command(TARGET GameServer POST_BUILD        
   COMMAND ${CMAKE_COMMAND} -E copy_if_different
-  "${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/icu/bin/icudt38.dll"
-  "$<TARGET_FILE_DIR:GroupServer>"
+  "${CMAKE_CURRENT_SOURCE_DIR}/Configuration/GameServer.cfg"
+  "$<TARGET_FILE_DIR:GameServer>"
 )
 
-add_custom_command(TARGET GroupServer POST_BUILD        
+add_custom_command(TARGET GameServer POST_BUILD        
   COMMAND ${CMAKE_COMMAND} -E copy_if_different
-  "${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/icu/bin/icuin38.dll"
-  "$<TARGET_FILE_DIR:GroupServer>"
+  "${CMAKE_CURRENT_SOURCE_DIR}/Configuration/ChaNameFilter.txt"
+  "$<TARGET_FILE_DIR:GameServer>/resource/ChaNameFilter.txt"
 )
 
-add_custom_command(TARGET GroupServer POST_BUILD        
+add_custom_command(TARGET GameServer POST_BUILD        
   COMMAND ${CMAKE_COMMAND} -E copy_if_different
   "${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/icu/bin/icuuc38.dll"
-  "$<TARGET_FILE_DIR:GroupServer>"
+  "$<TARGET_FILE_DIR:GameServer>"
 )
 
-add_custom_command(TARGET GroupServer POST_BUILD        
+add_custom_command(TARGET GameServer POST_BUILD        
   COMMAND ${CMAKE_COMMAND} -E copy_if_different
-  "${CMAKE_CURRENT_SOURCE_DIR}/Configuration/GroupServer.cfg"
-  "$<TARGET_FILE_DIR:GroupServer>"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/icu/bin/icuin38.dll"
+  "$<TARGET_FILE_DIR:GameServer>"
 )
 
-add_custom_command(TARGET GroupServer POST_BUILD        
+add_custom_command(TARGET GameServer POST_BUILD        
   COMMAND ${CMAKE_COMMAND} -E copy_if_different
-  "${CMAKE_CURRENT_SOURCE_DIR}/Configuration/GroupServer.loc"
-  "$<TARGET_FILE_DIR:GroupServer>"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/icu/bin/icudt38.dll"
+  "$<TARGET_FILE_DIR:GameServer>"
 )
 
-add_custom_command(TARGET GroupServer POST_BUILD        
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different
-  "${CMAKE_CURRENT_SOURCE_DIR}/Configuration/Script01.lua"
-  "$<TARGET_FILE_DIR:GroupServer>/resource/script/Script01.lua"
-)
 
 set(BUILD_TYPE "SERVER")
 

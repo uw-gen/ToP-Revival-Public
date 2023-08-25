@@ -60,7 +60,6 @@ target_link_libraries(GateServer PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/icu/lib/icudt.lib
   ${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/icu/lib/icuuc.lib
   ${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/icu/lib/icuin.lib
-  ${CMAKE_CURRENT_SOURCE_DIR}/../../CommonDependencies/Ipss/lib/BTI.lib
   Ws2_32.lib odbc32.lib winmm.lib shlwapi.lib
 )
 
