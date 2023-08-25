@@ -63,8 +63,8 @@ Repeat the process with any project you wanna build from this repo.
 *Client Projects*
 | Project | Ported? | CPP Version |
 |---------|:---------:|---------|
-| 3DMindPowerEngine  | :x: | N/A 
-| VisualMotionD3D | :x: | N/A 
+| 3DMindPowerEngine  | :x: | N/A
+| VisualMotionD3D | :white_check_mark: | 17
 | ErrorReport | :x: | N/A 
 | UpdateSysPKO | :x: | N/A 
 | KopUpdate | :x: | N/A 
