@@ -56,7 +56,7 @@ Repeat the process with any project you wanna build from this repo.
 | AccountServer | :white_check_mark: | 17 
 | GameServer  | :x: | N/A 
 | GroupServer | :x: | N/A 
-| GateServer  | :x: | N/A 
+| GateServer  | :white_check_mark: | 17 
 | InfoServer  | :x: | N/A 
 | TradeSystem | :x: | N/A 
 
