@@ -73,6 +73,8 @@ set(SOURCE_FILES
 add_executable(GameServer ${SOURCE_FILES})
 target_sources(GameServer PRIVATE ${SOURCE_FILES_DIR}/GameServer.rc)
 
+target_compile_features(GameServer PRIVATE cxx_std_17)
+
 set(DEPENDENCY_DIRS 
   "./include"
   "../../CommonDependencies/Server/sdk/include"

@@ -32,22 +32,22 @@ typedef unsigned char byte;
 bool createAttribFile(char const* filename, int width = ATTRIB_FILE_DEFAULT_WIDTH,
 					  int height = ATTRIB_FILE_DEFAULT_HEIGHT,
 					  int option = 0);
-void setTileAttrib(int nX, int nY, byte btAttrib, bool bAdd = true);
-void setTileIsland(int nX, int nY, byte btIsland);
+void setTileAttrib(int nX, int nY, ::byte btAttrib, bool bAdd = true);
+void setTileIsland(int nX, int nY, ::byte btIsland);
 bool openAttribFile(char const* filename);
 bool getAttribFileInfo(int& width, int& height);
 bool getTileAttrib(int x, int y, unsigned short& attrib);
-bool hasTileAttrib(int x, int y, byte attrib);
-bool delTileAttrib(int x, int y, byte attrib);
-bool getTileIsland(int x, int y, byte& index);
+bool hasTileAttrib(int x, int y, ::byte attrib);
+bool delTileAttrib(int x, int y, ::byte attrib);
+bool getTileIsland(int x, int y, ::byte& index);
 
 
 // 服务端只使用以下接口，客户端切勿使用！
 int s_openAttribFile(char const* filename); // 返回 -1 则错误
 bool s_getAttribFileInfo(int id, unsigned int& width, unsigned int& height);
 bool s_getTileAttrib(int id, unsigned int x, unsigned int y, unsigned short& attrib);
-bool s_hasTileAttrib(int id, unsigned int x, unsigned int y, byte attrib_mask);
-bool s_getTileIsland(int id, unsigned int x, unsigned int y, byte& island_index);
+bool s_hasTileAttrib(int id, unsigned int x, unsigned int y, ::byte attrib_mask);
+bool s_getTileIsland(int id, unsigned int x, unsigned int y, ::byte& island_index);
 
 // 设置对齐方式为1字节，因为要写入文件中
 #pragma pack(push)
@@ -65,7 +65,7 @@ typedef SAttribFileHeader terrain_attr_hdr;
 typedef struct _Tile_Attrib
 	{
 	unsigned short attrib; // tile属性
-	byte island; // 海岛编号
+	::byte island; // 海岛编号
 
 	} STILE_ATTRIB;
 typedef _Tile_Attrib terrain_attr_dat;
