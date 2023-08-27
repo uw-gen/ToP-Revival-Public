@@ -65,11 +65,11 @@ Repeat the process with any project you wanna build from this repo.
 |---------|:---------:|---------|
 | 3DMindPowerEngine  | :white_check_mark: | 17
 | VisualMotionD3D | :white_check_mark: | 17
+| Client | :white_check_mark: | 14
 | ErrorReport | :x: | N/A 
 | UpdateSysPKO | :x: | N/A 
 | KopUpdate | :x: | N/A 
 | VersionBuilder | :x: | N/A 
-| Client | :x: | N/A 
 
 *Plug-ins & Tools Projects*
 | Project | Ported? | CPP Version |

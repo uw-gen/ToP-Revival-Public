@@ -78,11 +78,4 @@ protected:
 #define GetAudioDevice()            AudioSDL::get_instance()
 
 
-#ifdef _DEBUG
-    #pragma comment(lib, "AudioSDL_d.lib")
-#else
-    #pragma comment(lib, "AudioSDL.lib")
-#endif
-
-
 #endif

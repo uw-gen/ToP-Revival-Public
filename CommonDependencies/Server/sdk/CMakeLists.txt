@@ -29,7 +29,7 @@ target_compile_features(NetworkingSDK PRIVATE cxx_std_17)
 
 # Configuration types
 IF(BUILD_TYPE STREQUAL "CLIENT")
-  SET(CMAKE_CONFIGURATION_TYPES "DebugServer;ReleaseServer;DebugClient;ReleaseClient" CACHE STRING "Configs" FORCE)
+  SET(CMAKE_CONFIGURATION_TYPES "DebugClient;ReleaseClient" CACHE STRING "Configs" FORCE)
 ELSE()
   SET(CMAKE_CONFIGURATION_TYPES "DebugServer;ReleaseServer" CACHE STRING "Configs" FORCE)
 ENDIF()

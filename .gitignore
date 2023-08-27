@@ -399,3 +399,5 @@ FodyWeavers.xsd
 
 build
 Server/CommonDependencies
+Client/CommonDependencies
+ToP-Revival-Client
