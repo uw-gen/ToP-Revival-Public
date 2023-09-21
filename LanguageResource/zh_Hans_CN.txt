@@ -420,10 +420,10 @@ zh_Hans_CN{
     CL_LANGUAGE_MATCH_462 { "物品过多\n" }
     CL_LANGUAGE_MATCH_463 { "您没有贸易证或贸易证等级不够,无法购买" }
     CL_LANGUAGE_MATCH_464 { "msgui.clu中没有定义界面%s\n" }
-    CL_LANGUAGE_MATCH_465 { "当前会话" }
-    CL_LANGUAGE_MATCH_466 { "好友" }
-    CL_LANGUAGE_MATCH_467 { "组队" }
-    CL_LANGUAGE_MATCH_468 { "公会" }
+    CL_LANGUAGE_MATCH_465 { "UNKNOWN0001" }
+    CL_LANGUAGE_MATCH_466 { "UNKNOWN0002" }
+    CL_LANGUAGE_MATCH_467 { "UNKNOWN0003" }
+    CL_LANGUAGE_MATCH_468 { "UNKNOWN0004" }
     CL_LANGUAGE_MATCH_469 { "路人" }
     CL_LANGUAGE_MATCH_47 { "msg更换头发时,发型数据不对:[%d]" }
     CL_LANGUAGE_MATCH_470 { "没有定义界面_frmAddFriend!" }
@@ -848,8 +848,8 @@ zh_Hans_CN{
     CL_LANGUAGE_MATCH_848 { "乱斗点数" }
     CL_LANGUAGE_MATCH_849 { "请先放入乱斗天书" }
     CL_LANGUAGE_MATCH_85 { "Error, 更换发型失败：脚本ID：%d, 角色ID：%d, 模型ID：%d" }
-    CL_LANGUAGE_MATCH_850 { "导师" }
-    CL_LANGUAGE_MATCH_851 { "学徒" }
+    CL_LANGUAGE_MATCH_850 { "UNKNOWN0005" }
+    CL_LANGUAGE_MATCH_851 { "UNKNOWN0006" }
     CL_LANGUAGE_MATCH_852 { "您放入的不是贝壳，请重新选择" }
     CL_LANGUAGE_MATCH_853 { "请先放入贝壳" }
     CL_LANGUAGE_MATCH_854 { "解除关系" }
