@@ -1,6 +1,6 @@
 @echo off
 
-TITLE Tales of Pirates - Build
+TITLE Tales of Pirates - CMake
 
 set Generator="Visual Studio 17 2022"
 set StartDir=%cd%
