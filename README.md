@@ -1,9 +1,9 @@
 # Tales of Pirates - Revival
 
-Welcome to ToP - Revival repo, What's this you may ask?
-this is just a *Tales of Pirates* repo, specifically a *TOP II* source repo, This is initially identical to **娴风洍鐜婼erver.rar** from pkodev's released source code, all credits go to the rightful owners.
+Welcome to ToP - Revival repo, What's this? you might ask.
+This is just a *Tales of Pirates* repo, specifically a *TOP II* source repo. This is initially identical to **娴风洍鐜婼erver.rar** from pkodev's released source code, all credits go to the rightful owners.
 
-# Building The Source
+# Building the Source
 This repo is using cmake, you'll need to get at least cmake version 3.26; it is recommended to just grab the latest version from [CMake Official Website](https://cmake.org/download/).
 
 for common dependencies, you can use cmake with **VS Code** as your IDE and let CMake build it for you with **Visual Studio Developer CMD**, however when you get more specific and compile **Server Binaries** you'll need Visual Studio for the following reasons:
