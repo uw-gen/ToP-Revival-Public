@@ -5,6 +5,7 @@ TITLE Tales of Pirates - CMake
 set Generator="Visual Studio 17 2022"
 set StartDir=%cd%
 set CommonDependenciesDir=%StartDir%\CommonDependencies\
+set MindPowerEngineDir=%StartDir%\3DMindPowerEngine\
 
 
 :: - 
@@ -30,7 +31,7 @@ if %cmake_found% == 1 (
 
 
 :: - 
-:: - Let's CMake :-)
+:: - Let's CMake - Common Dependencies :-)
 :: - 
 echo CMake-ing Common Dependencies ...
 
@@ -47,6 +48,21 @@ set CommonDependency=%CommonDependenciesDir%AudioSDL\;^
                 %CommonDependenciesDir%Util\
 
 for %%i in (%CommonDependency%) do (
+    cd %%i
+    echo     In:  %%i
+    echo     Issuing: cmake.exe -G%Generator% -H. -B./build -AWin32
+    cmake.exe -G%Generator% -H. -B./build -AWin32
+)
+
+:: - 
+:: - Let's CMake - 3DMindPowerEngine :-)
+:: - 
+echo CMake-ing 3DMindPowerEngine ...
+
+set MindPowerEngine=%MindPowerEngineDir%Dependencies\VisualMotionD3D\;^
+                %MindPowerEngineDir%
+
+for %%i in (%MindPowerEngine%) do (
     cd %%i
     echo     In:  %%i
     echo     Issuing: cmake.exe -G%Generator% -H. -B./build -AWin32
