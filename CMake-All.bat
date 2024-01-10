@@ -30,9 +30,9 @@ if %cmake_found% == 1 (
 
 
 :: - 
-:: - Let's build :-)
+:: - Let's CMake :-)
 :: - 
-echo Building Common Dependencies ...
+echo CMake-ing Common Dependencies ...
 
 set CommonDependency=%CommonDependenciesDir%AudioSDL\;^
                 %CommonDependenciesDir%CaLua\Lua;^
