@@ -2,7 +2,9 @@
 
 TITLE Tales of Pirates - Build
 
-set cwd=%cd%
+set Generator="Visual Studio 17 2022"
+set StartDir=%cd%
+set CommonDependenciesDir=%StartDir%\CommonDependencies\
 
 
 :: - 
@@ -30,7 +32,26 @@ if %cmake_found% == 1 (
 :: - 
 :: - Let's build :-)
 :: - 
-echo Building with CMake ...
+echo Building Common Dependencies ...
+
+set CommonDependency=%CommonDependenciesDir%AudioSDL\;^
+                %CommonDependenciesDir%CaLua\Lua;^
+                %CommonDependenciesDir%CaLua\LuaLib;^
+                %CommonDependenciesDir%CaLua\;^
+                %CommonDependenciesDir%Common\;^
+                %CommonDependenciesDir%EncLib\;^
+                %CommonDependenciesDir%ICUHelper\;^
+                %CommonDependenciesDir%InfoNet\;^
+                %CommonDependenciesDir%Server\sdk\;^
+                %CommonDependenciesDir%Status\;^
+                %CommonDependenciesDir%Util\
+
+for %%i in (%CommonDependency%) do (
+    cd %%i
+    echo     In:  %%i
+    echo     Issuing: cmake.exe -G%Generator% -H. -B./build -AWin32
+    cmake.exe -G%Generator% -H. -B./build -AWin32
+)
 
 
 
@@ -47,5 +68,6 @@ echo Building with CMake ...
 :: - 
 :end
 
+cd %StartDir%
 PAUSE
 
