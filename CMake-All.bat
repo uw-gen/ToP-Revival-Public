@@ -6,6 +6,7 @@ set Generator="Visual Studio 17 2022"
 set StartDir=%cd%
 set CommonDependenciesDir=%StartDir%\CommonDependencies\
 set MindPowerEngineDir=%StartDir%\3DMindPowerEngine\
+set ClientDir=%StartDir%\Client\
 
 
 :: - 
@@ -63,6 +64,20 @@ set MindPowerEngine=%MindPowerEngineDir%Dependencies\VisualMotionD3D\;^
                 %MindPowerEngineDir%
 
 for %%i in (%MindPowerEngine%) do (
+    cd %%i
+    echo     In:  %%i
+    echo     Issuing: cmake.exe -G%Generator% -H. -B./build -AWin32
+    cmake.exe -G%Generator% -H. -B./build -AWin32
+)
+
+:: - 
+:: - Let's CMake - Client :-)
+:: - 
+echo CMake-ing Client ...
+
+set Client=%ClientDir%
+
+for %%i in (%Client%) do (
     cd %%i
     echo     In:  %%i
     echo     Issuing: cmake.exe -G%Generator% -H. -B./build -AWin32
